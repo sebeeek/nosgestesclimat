@@ -8,3 +8,29 @@
     L'usage de simples multiprises permet de les éteindre complètement en un clin d'oeil.
 
     Heureusement, l'électricité française étant largement décarbonnée, l'empreinte de la consommation résiduelle de ces appareils n'est pas très importante.
+
+
+
+divers . textile . 2ndmain:
+  titre: Je m'habille de 2nd main
+  icônes: 👕👖
+  formule: divers . textile - divers . textile . occasion
+  unité: kgCO2e
+  
+divers . textile . occasion:
+  formule: 0.125 * montant
+  unité: kgCO2e 
+#0.125 vient du calcul fait en extrayant les phases amont pour les différents textiles de l'étude. On obtient plus 600 kgCO2e mais 125 kgCO2e
+#Source : MODÉLISATION ET ÉVALUATION DU POIDS CARBONE DE PRODUITS DE CONSOMMATION ET BIENS D’ÉQUIPEMENTS, Septembre 2018, ADEME
+
+divers . autres produits . 2ndmain:
+  titre: Je m'habille de 2nd main
+  icônes: 👕👖
+  formule: divers . autres produits - divers . autres produits . occasion
+  unité: kgCO2e
+  
+divers . autres produits . occasion:
+  formule: divers . autres produits * 40%
+  unité: kgCO2e 
+#40 % vient du calcul fait en extrayant les phases amont pour les différents produits mobilier de l'étude. On obtient une réduction moyenne de l'impact GES de 40%
+#Source : MODÉLISATION ET ÉVALUATION DU POIDS CARBONE DE PRODUITS DE CONSOMMATION ET BIENS D’ÉQUIPEMENTS, Septembre 2018, ADEME
