@@ -95,7 +95,7 @@ transport . voiture . thermique: oui # sans le 'oui', une question vide est posÃ
 
 transport . voiture . gabarit:
   applicable si: km > 0
-  question: Quel est le gabarit de la voiture ?
+  question: Quel est le gabarit de la voiture que vous utilisez le plus ?
   description: |
     Plus une voiture est lourde et haute donc avec une forte prise au vent, plus elle consomme donc plus elle pollue ! 
 
