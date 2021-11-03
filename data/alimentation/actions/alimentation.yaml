@@ -28,7 +28,7 @@ alimentation . réduire viande . par deux . par semaine . nouveau régime:
 
 
 alimentation . réduire viande . par deux . par semaine . nouveau régime . compensation végétarienne:
-  formule: plats . végétarien . empreinte * (nombre de plats viande / 2)
+  formule: plats . empreinte végétarien * (nombre de plats viande / 2)
   description: On compense la division par 2 des plats de viande par des plats végétariens.
 
 alimentation . réduire viande . par quatre:
@@ -57,7 +57,7 @@ alimentation . réduire viande . par quatre . par semaine . nouveau régime:
       - compensation végétarienne
 
 alimentation . réduire viande . par quatre . par semaine . nouveau régime . compensation végétarienne:
-  formule: plats . végétarien . empreinte * (nombre de plats viande * (3 / 4))
+  formule: plats . empreinte végétarien * (nombre de plats viande * (3 / 4))
   description: On compense la division par 4 des plats de viande par des plats végétariens.
 
 alimentation . devenir végétarien:
@@ -79,11 +79,11 @@ alimentation . devenir végétarien . par semaine:
   formule: plats - une semaine végétarienne
 
 alimentation . une semaine végétarienne:
-  formule: 14 * plats . végétarien . empreinte
+  formule: 14 * plats . empreinte végétarien
 
 
 alimentation . devenir végétalien:
-  applicable si: plats . végétarien . nombre > 0
+  applicable si: (plats campus . végétarien . nombre + plats perso . végétarien . nombre) > 0
   formule: par semaine * 52
   icônes: 🥗🌾
   description: Adopter un régime végétalien, donc sans produits animaux.
@@ -93,10 +93,10 @@ alimentation . devenir végétalien . par semaine:
   formule: plats - une semaine végétalien
 
 alimentation . une semaine végétalien:
-  formule: 14 * plats . végétalien . empreinte
+  formule: 14 * plats . empreinte végétalien
 
 alimentation . viande faible empreinte:
-  applicable si: plats . viande 2 . nombre > 0  
+  applicable si: (plats campus . viande 2 . nombre + plats perso . viande 2 . nombre) > 0  
   titre: Privilégier la volaille ou le porc
   formule: par semaine * 52
   icônes: 🥩🍗
@@ -120,7 +120,7 @@ alimentation . viande faible empreinte . par semaine . nouveau régime:
       - compensation viande 1
 
 alimentation . viande faible empreinte . par semaine . nouveau régime . compensation viande 1:
-  formule: plats . viande 1 . empreinte * (plats . viande 2 . nombre)
+  formule: plats . empreinte viande 1 * (plats campus . viande 2 . nombre + plats perso . viande 2 . nombre)
   description: On compense la suppression des plat viande 2 en plat viande 1.
 
 

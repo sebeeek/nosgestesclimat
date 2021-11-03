@@ -154,20 +154,40 @@ alimentation . boisson . alcool . litres:
 alimentation . déjeuner et dîner:
   icônes: 🍽️
   formule: par semaine * 52
+
 alimentation . déjeuner et dîner . par semaine:
-  formule: plats
+  formule: plats campus + plats perso
 
-alimentation . plats:
-  titre: Empreinte de 14 repas
+alimentation . self:
+  question: En général, lorsque tu es en cours, manges-tu au self / restaurant universitaire ?
+  description: Réponds oui à cette question si tu manges majoritairement au self durant ta semaine de cours 😊
+  par défaut: oui
+
+alimentation . plats campus:
+  titre: Empreinte de 5 repas
+  applicable si: self
   description: |
-      A choisir : 14 plats types pour représenter une semaine complète de repas midi et soir (donc, petit déjeuner non inclus). 
+      A choisir : 5 plats types pour représenter une semaine complète de déjeuners sur campus (donc, petit déjeuner non inclus). 
 
-      Ceci est la somme de l'empreinte de ces 14 plats.
+      Ceci est la somme de l'empreinte de ces 5 plats.
   formule: 
     somme:
       - viande 1
-      #  à venir dans une v2
-      #  - viande 2
+      - viande 2
+      - végétalien
+      - végétarien
+      - poisson 1
+      - poisson 2
+
+alimentation . plats perso:
+  titre: Empreinte des autres repas de la semaine
+  description: |
+      A choisir : plats types pour représenter une semaine complète de déjeuners et dîners (donc, petit déjeuner non inclus). 
+
+      Ceci est la somme de l'empreinte de ces plats.
+  formule: 
+    somme:
+      - viande 1
       - viande 2
       - végétalien
       - végétarien
@@ -181,41 +201,144 @@ alimentation . plats:
         #      - classique poulet
         #      - peu de viande boeuf
         #      - peu de viande poulet
-  note: |
+#   note: |
       
-      Nous limitons le choix pour l'instant à 4 régimes. Ils sont basés sur les régimes représentatifs [documentés par l'ADEME](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm).
+#       Nous limitons le choix pour l'instant à 4 régimes. Ils sont basés sur les régimes représentatifs [documentés par l'ADEME](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm).
       
-      Les repas viande ne sont déclinés qu'avec une quantité "classique" de viande.
+#       Les repas viande ne sont déclinés qu'avec une quantité "classique" de viande.
       
-      Nous y ajoutons le régime végétalien, variation du végétarien.
+#       Nous y ajoutons le régime végétalien, variation du végétarien.
+# références: 
+#   - https://www.bilans-ges.ademe.fr/fr/actualite/actualite/detail/id/23
 
+alimentation . plats perso . chipstotal:
+  formule:
+    variations: 
+      - si: self
+        alors: 9
+      - sinon: 14
 
-références: 
-  - https://www.bilans-ges.ademe.fr/fr/actualite/actualite/detail/id/23
-
-alimentation . plats . végétalien:
-  formule: empreinte * nombre
+alimentation . plats campus . végétalien:
+  formule: plats . empreinte végétalien * nombre
   icônes: 🌾🥜🥗
-  description: |
-    Repas sans produits animaux.
+alimentation . plats campus . végétalien . nombre:
+  question: Nombre de plats végétaliens par semaine au self
+  par défaut: 0
+  période: semaine
 
-    Voici le menu type utilisé pour notre calcul.
+alimentation . plats campus . végétarien:
+  formule: plats . empreinte végétarien * nombre
+  icônes: 🥗🍳🧀
+alimentation . plats campus . végétarien . nombre:
+  question: Nombre de plats végétariens par semaine au self
+  par défaut: 1
+  période: semaine
 
-    | Ingrédients  | Qte (g)  | Kcal  | Protéines (g)  | Lipides (g)  | gCO2e /kg  | gCO2e   |
-    |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-    |      Entrée : salade de légumes  |  |  |  |  |  |  |
-    | 200g légumes de saison  | 200  | 60  | 3  | 0  | 267  | 53.4  |
-    | noix françaises de saison | 10  | 71  | 1,3  | 6,7  | 1327  | 13,3  |
-    | huile (1/2 c.s.)  | 7  | 63  | 0  | 7  | 2153  | 15,1  |
-    |      Plat principal : tofu mariné, pommes de terre et oignons  |  |  |  |  |  |  |
-    | tofu  | 150  | 128  | 16  | 8  | 982  | 147,3  |
-    | pommes de terre  | 200  | 170  | 3  | 0,2  | 77  | 15.5  |
-    | huile (1/2 c.s.)  | 7  | 63  | 0  | 7  | 2153  | 17,1  |
-    |      Dessert : salade de fruits  |  |  |  |  |  |  |
-    | fruits de saison  | 200  | 100  | 2  | 0  | 267  | 53.4  |
-    | Pain  | 50  | 125  | 4  | 0,6  | 1520  | 76  |
-    | Total  |    | 776  | 29,3  | 29,5  |    | 393,9 |
-alimentation . plats . végétalien . empreinte:
+alimentation . plats campus . viande 1:
+  formule: plats . empreinte viande 1 * nombre
+  icônes: 🍗🥓🧀
+alimentation . plats campus . viande 1 . nombre:
+  question: Nombre de plats viande 1 par semaine au self
+  par défaut: 2
+  période: semaine
+
+alimentation . plats campus . viande 2:
+  formule: plats . empreinte viande 2 * nombre
+  icônes: 🥩🍖
+alimentation . plats campus . viande 2 . nombre:
+  question: Nombre de plats végétaliens par semaine au self
+  par défaut: 1
+  période: semaine
+
+alimentation . plats campus . poisson 1:
+  formule: plats . empreinte poisson 1 * nombre
+  icônes: 🍣🥧
+alimentation . plats campus . poisson 1 . nombre:
+  question: Nombre de plats végétaliens par semaine au self
+  par défaut: 0
+  période: semaine
+
+alimentation . plats campus . poisson 2:
+  formule: plats . empreinte poisson 2 * nombre
+  icônes: 🐟🍚
+alimentation . plats campus . poisson 2 . nombre:
+  question: Nombre de plats végétaliens par semaine au self
+  par défaut: 1
+  période: semaine
+
+alimentation . plats perso . végétalien:
+  formule: plats . empreinte végétalien * nombre
+  icônes: 🌾🥜🥗
+alimentation . plats perso . végétalien . nombre:
+  question: Nombre de plats végétaliens par semaine
+  par défaut: 2
+  # par défaut:
+  #   variations:
+  #     - si: déjeuner et dîner . self
+  #       alors: 1
+  #     - sinon: 2
+  période: semaine
+
+alimentation . plats perso . végétarien:
+  formule: plats . empreinte végétarien * nombre
+  icônes: 🥗🍳🧀
+alimentation . plats perso . végétarien . nombre:
+  question: Nombre de plats végétariens par semaine
+  par défaut: 2
+  période: semaine
+
+alimentation . plats perso . viande 1:
+  formule: plats . empreinte viande 1 * nombre
+  icônes: 🍗🥓🧀
+alimentation . plats perso . viande 1 . nombre:
+  question: Nombre de plats viande 1 par semaine
+  par défaut: 2
+  période: semaine
+
+alimentation . plats perso . viande 2:
+  formule: plats . empreinte viande 2 * nombre
+  icônes: 🥩🍖
+alimentation . plats perso . viande 2 . nombre:
+  question: Nombre de plats végétaliens par semaine
+  par défaut: 1
+  période: semaine
+
+alimentation . plats perso . poisson 1:
+  formule: plats . empreinte poisson 1 * nombre
+  icônes: 🍣🥧
+alimentation . plats perso . poisson 1 . nombre:
+  question: Nombre de plats végétaliens par semaine
+  par défaut: 1
+  période: semaine
+
+alimentation . plats perso . poisson 2:
+  formule: plats . empreinte poisson 2 * nombre
+  icônes: 🐟🍚
+alimentation . plats perso . poisson 2 . nombre:
+  question: Nombre de plats végétaliens par semaine
+  par défaut: 1
+  période: semaine
+
+
+alimentation . nombre de plats viande: 
+  formule: plats campus . viande 1 . nombre + plats campus . viande 2 . nombre + plats perso . viande 1 . nombre + plats perso . viande 2 . nombre
+
+alimentation . plats:
+alimentation . plats . végétalien:
+  formule: plats campus . végétalien + plats perso . végétalien
+alimentation . plats . végétarien:
+  formule: plats campus . végétarien + plats perso . végétarien
+alimentation . plats . viande 1:
+  formule: plats campus . viande 1 + plats perso . viande 1
+alimentation . plats . viande 2:
+  formule: plats campus . viande 2 + plats perso . viande 2
+alimentation . plats . poisson 1:
+  formule: plats campus . poisson 1 + plats perso . poisson 1
+alimentation . plats . poisson 2:
+  formule: plats campus . poisson 2 + plats perso . poisson 2
+
+alimentation . plats . empreinte végétalien:
+  icônes: 🌾🥜🥗
   formule: 0.394 
   unité: kgCO2e
   note: |
@@ -236,14 +359,31 @@ alimentation . plats . végétalien . empreinte:
     #### Ajout des noix
     
     Pour les noix, nous ajoutons 1 cerneau (10g sans la coquille), et nous utilisons l'empreinte climat de la base [FoodGES](https://www.bilans-ges.ademe.fr/fr/actualite/actualite/detail/id/23) de l'ADEME, `1,3kgCO2e/kg ingéré`, et les valeurs nutritives de [la page Wikipedia](https://fr.wikipedia.org/wiki/Noix#Valeur_nutritive). 
-alimentation . plats . végétalien . nombre:
-  question: Nombre de plats végétaliens par semaine
-  par défaut: 2
-  période: semaine
+  description: |
+    Repas sans produits animaux.
 
-alimentation . plats . végétarien:
-  formule: empreinte * nombre
+    Voici le menu type utilisé pour notre calcul.
+
+    | Ingrédients  | Qte (g)  | Kcal  | Protéines (g)  | Lipides (g)  | gCO2e /kg  | gCO2e   |
+    |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+    |      Entrée : salade de légumes  |  |  |  |  |  |  |
+    | 200g légumes de saison  | 200  | 60  | 3  | 0  | 267  | 53.4  |
+    | noix françaises de saison | 10  | 71  | 1,3  | 6,7  | 1327  | 13,3  |
+    | huile (1/2 c.s.)  | 7  | 63  | 0  | 7  | 2153  | 15,1  |
+    |      Plat principal : tofu mariné, pommes de terre et oignons  |  |  |  |  |  |  |
+    | tofu  | 150  | 128  | 16  | 8  | 982  | 147,3  |
+    | pommes de terre  | 200  | 170  | 3  | 0,2  | 77  | 15.5  |
+    | huile (1/2 c.s.)  | 7  | 63  | 0  | 7  | 2153  | 17,1  |
+    |      Dessert : salade de fruits  |  |  |  |  |  |  |
+    | fruits de saison  | 200  | 100  | 2  | 0  | 267  | 53.4  |
+    | Pain  | 50  | 125  | 4  | 0,6  | 1520  | 76  |
+    | Total  |    | 776  | 29,3  | 29,5  |    | 393,9 |
+
+alimentation . plats . empreinte végétarien:
   icônes: 🥗🍳🧀
+  formule: 0.510
+  unité: kgCO2e
+  note: C'est le "Repas végétarien 1" [ici](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm).
   description: |
     Repas sans chair animale, avec des oeufs ou un peu de fromage.
 
@@ -262,35 +402,12 @@ alimentation . plats . végétarien:
     | fruits de saison  | 200  | 100  | 2  | 0  | 267  | 53.4  |
     | Pain  | 50  | 125  | 4  | 0,6  | 1520  | 76  |
     | Total  |    | 776  | 28  | 25,8  |    | 510 |
-
-alimentation . plats . végétarien . empreinte:
-  formule: 0.510
-  unité: kgCO2e
-  note: C'est le "Repas végétarien 1" [ici](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm).
-
-alimentation . plats . végétarien . nombre:
-  question: Nombre de plats végétariens par semaine
-  par défaut: 4
-  période: semaine
-
-
-  #alimentation . plats . viande 2:
-  #  titre: Animal moins impactant
-  #  icônes: 🍣🐚
-  #  description: Repas contenant poisson, crustacés, lapin, ou canard.
-  #  note: Les viandes chiffrées à 6 - 10 kg CO2e par kg ingéré.
-  #  formule: empreinte * nombre
-  #alimentation . plats . viande 2 . empreinte:
-  #  formule: 666
-  #	note: Pas implémenté encore, non activité.
-  #alimentation . plats . viande 2 . nombre:
-  #  question: Nombre de plats types
-  #  par défaut: 0
-  #  période: semaine
   
-alimentation . plats . viande 1:
+alimentation . plats . empreinte viande 1:
   titre: Viande 1
   icônes: 🍗🥓🧀
+  formule: 1.350
+  unité: kgCO2e
   description: |
     Repas contenant une pièce de poulet, porc, ou fromage.
 
@@ -311,18 +428,12 @@ alimentation . plats . viande 1:
     | Pain  | 50  | 125  | 4  | 0,6  | 1520  | 76  |
     | Total  |    | 931  | 55  | 40  |    | 1350 |
   note: C'est le "Repas classique 1 (avec poulet)" [ici](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm).
-  formule: empreinte * nombre
-alimentation . plats . viande 1 . empreinte:
-  formule: 1.350
-  unité: kgCO2e
-alimentation . plats . viande 1 . nombre:
-  question: Nombre de plats viande 1 par semaine
-  par défaut: 3
-  période: semaine
 
-alimentation . plats . viande 2:
+alimentation . plats . empreinte viande 2:
   titre: viande 2
   icônes: 🥩🍖
+  formule: 6.290
+  unité: kgCO2e
   description: |
     Repas contenant une pièce de boeuf, veau, ou agneau. 
 
@@ -347,22 +458,20 @@ alimentation . plats . viande 2:
     C'est le repas "classique 2" de la [base carbone](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm).
 
     Notons que cette catégorie ne correspond pas à la définition vague de la viande rouge, qui peut par exemple inclure le porc ([source](https://fr.wikipedia.org/wiki/Viande_rouge#Eléments_de_définition)).
-  formule: empreinte * nombre
-alimentation . plats . viande 2 . empreinte:
-  formule: 6.290
-  unité: kgCO2e
-  note: C'est le "Repas classique 2 (avec bœuf)" [ici](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm).
-alimentation . plats . viande 2 . nombre:
-  question: Nombre de plats viande 2 par semaine
-  par défaut: 4
-  période: semaine
 
-alimentation . nombre de plats viande: 
-  formule: plats . viande 1 . nombre + plats . viande 2 . nombre
 
-alimentation . plats . poisson 1:
-  formule: empreinte * nombre
+alimentation . plats . empreinte poisson 1:
   icônes: 🍣🥧
+  formule: 1.113
+  unité: kgCO2e
+  note: |
+    Pour l'instant, en l'absence de repas type poisson dans la [base carbone](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm), 
+    nous proposons un menu poisson à partir des "repas classiques" de la base carbone. 
+
+    Le plat principal est une tarte au saumon. Le facteur d'émission associé à l'ingrédient principal (ici le saumon)
+    correspond à une moyenne de facteurs d'émissions associés au thon, saumon, sardine ou maquereau d'Agribalyse.
+
+    🧮 Le calcul détaillé est [disponible ici](https://github.com/datagir/nosgestesclimat/blob/master/data/alimentation/menus-poisson.ods) sous forme de tableur.
   description: |
     Repas contenant thon, saumon, sardine ou maquereau.
 
@@ -384,29 +493,19 @@ alimentation . plats . poisson 1:
     | poires  | 100  | 60  | 0,4  | 0  | 709,5  | 71  |
     | huile (1 c.s.)  | 15  | 135  | 0  | 15  | 2153  | 32,3  |
     | Total  |    | 956  | 37  | 57,9  |    | 1113,1 |
-
-alimentation . plats . poisson 1 . empreinte:
-  formule: 1.113
+  
+alimentation . plats . empreinte poisson 2:
+  icônes: 🐟🍚
+  formule: 1.984
   unité: kgCO2e
   note: |
     Pour l'instant, en l'absence de repas type poisson dans la [base carbone](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm), 
     nous proposons un menu poisson à partir des "repas classiques" de la base carbone. 
 
-    Le plat principal est une tarte au saumon. Le facteur d'émission associé à l'ingrédient principal (ici le saumon)
-    correspond à une moyenne de facteurs d'émissions associés au thon, saumon, sardine ou maquereau d'Agribalyse.
+    Le plat principal est un filet de poisson blanc, sauce beurre blanc. Le facteur d'émission associé à l'ingrédient principal (ici le saumon)
+    correspond à une moyenne de facteurs d'émissions associésà divers poissons blancs (bar, cabillaud, lotte, merlu...) d'Agribalyse.
 
     🧮 Le calcul détaillé est [disponible ici](https://github.com/datagir/nosgestesclimat/blob/master/data/alimentation/menus-poisson.ods) sous forme de tableur.
-
-
-alimentation . plats . poisson 1 . nombre:
-  question: Nombre de plats poisson 1 par semaine
-  par défaut: 1
-  période: semaine
-  
-
-alimentation . plats . poisson 2:
-  formule: empreinte * nombre
-  icônes: 🐟🍚
   description: |
     Repas avec un filet de poisson blanc.
 
@@ -426,22 +525,6 @@ alimentation . plats . poisson 2:
     | poires  | 100  | 60  | 0,4  | 0  | 709,5  | 71  |
     | huile (1 c.s.)  | 15  | 135  | 0  | 15  | 2153  | 32,3  |
     | Total  |    | 841  | 41  | 31  |    | 1983,8 |
-
-alimentation . plats . poisson 2 . empreinte:
-  formule: 1.984
-  unité: kgCO2e
-  note: |
-    Pour l'instant, en l'absence de repas type poisson dans la [base carbone](https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?repas.htm), 
-    nous proposons un menu poisson à partir des "repas classiques" de la base carbone. 
-
-    Le plat principal est un filet de poisson blanc, sauce beurre blanc. Le facteur d'émission associé à l'ingrédient principal (ici le saumon)
-    correspond à une moyenne de facteurs d'émissions associésà divers poissons blancs (bar, cabillaud, lotte, merlu...) d'Agribalyse.
-
-    🧮 Le calcul détaillé est [disponible ici](https://github.com/datagir/nosgestesclimat/blob/master/data/alimentation/menus-poisson.ods) sous forme de tableur.
-alimentation . plats . poisson 2 . nombre:
-  question: Nombre de plats poisson 2 par semaine
-  par défaut: 0
-  période: semaine
 
 
 alimentation . planétaire: 
