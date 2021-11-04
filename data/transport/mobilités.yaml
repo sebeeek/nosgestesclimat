@@ -1,0 +1,373 @@
+
+#------------------------------------------- Mobilité France ----------------------------------------------------
+
+transport . mobilité france:
+  applicable si: deplacantmobilite
+  description: |
+    ![](https://lepetitjournal.com/sites/default/files/styles/main_article/public/2020-02/photo-1491308056676-205b7c9a7dc1.jpg?itok=vYCqNkei)
+    
+    La mobilité en France concerne l’année civile en cours. S’inscrivent dans cette catégorie tous les départs sur le territoire français dans le cadre des études à Centrale Nantes (double diplômes et stages).
+    N’ont pas été comptés dans le calcul les éventuels retours 	au domicile familial des étudiant·e·s, car ils ont été considérés comme faisant partie de l’impact personnel de ces dernier·ère·s.
+  formule:
+    variations:
+      - si: deplacantmobilite . moyen = 'voiture'
+        alors: transport . mobilité france . voiture
+      - si: deplacantmobilite . moyen = 'train'
+        alors: transport . mobilité france . train
+      - si: deplacantmobilite . moyen = 'avion'
+        alors: transport . mobilité france . avion
+      - si: deplacantmobilite . moyen = 'bus'
+        alors: transport . mobilité france . bus
+
+transport . mobilité france . deplacantmobilite:
+  question: Avez-vous effectué ou allez-vous effectuer une mobilité en France (hors de votre ville de résidence) durant cette année scolaire dans le cadre de vos études ? (hors associatif)
+  par défaut: non
+
+transport . mobilité france . deplacantmobilite . moyen:
+  question: Quel moyen de transport avez-vous utilisé ou allez-vous utiliser pour votre mobilité ?
+  formule: 
+    une possibilité: 
+      choix obligatoire: oui
+      possibilités:
+        - voiture
+        - train
+        - avion
+        - bus
+  par défaut: "'train'"
+  
+transport . mobilité france . deplacantmobilite . moyen . voiture:
+transport . mobilité france . deplacantmobilite . moyen . train:  
+transport . mobilité france . deplacantmobilite . moyen . avion:
+transport . mobilité france . deplacantmobilite . moyen . bus:
+
+#----------------------------------------------- Voiture -----------------------------------------------------
+
+transport . mobilité france . voiture :
+  formule: (construction amortie + impact usage) / voyageurs
+  unité: kgCO2e
+
+
+transport . mobilité france . voiture . voyageurs:
+  question: Quel était le nombre moyen de voyageurs dans la voiture ?
+  par défaut: 1
+  unité: voyageurs
+  suggestions:  
+    je suis le seul: 1
+    seul ou à deux selon le trajet: 1.5
+    à deux: 2
+    à cinq: 5
+
+transport . mobilité france . voiture . km:
+  description: |
+    C'est la distance parcourue pour vous rendre depuis votre domicile jusqu'au lieu de votre mobilité (aller seulement)
+  question: Combien de kilomètres avez-vous parcouru ou allez-vous parcourir pour effectuer ce trajet (aller seulement)?
+  unité: km
+  suggestions: 
+    Nantes🔁Paris(A/R): 380
+    Nantes🔁Lille(A/R): 600
+    Nantes🔁Marseille(A/R): 1000
+  par défaut: 500
+
+transport . mobilité france . voiture . impact usage:
+  formule: 2 * km * empreinte au kilomètre
+  unité: kgCO2e
+
+transport . mobilité france . voiture . empreinte au kilomètre: 
+  description: |
+    La valeur de l'empreinte au kilomètre pour les véhicules de l'école a été calculé en considérant une consomation moyenne de 7L au 100. 
+  formule: transport . voiture . empreinte . au kilomètre
+
+transport . mobilité france . voiture . construction amortie:
+  formule: transport . voiture . empreinte . construction amortie
+  unité: kgCO2e
+  note: Attention division par 0.
+
+#----------------------------------------------- Train -----------------------------------------------------
+
+transport . mobilité france . train:
+  description: |
+    ![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/TER_Vesoul.jpg/640px-TER_Vesoul.jpg)
+  formule: km * impact par km
+
+transport . mobilité france . train . impact par km:
+  formule: 0.0053
+  unité: kgCO2e/km
+
+transport . mobilité france . train . km:
+  question: Combien de kilomètres avez-vous parcouru ou allez-vous parcourir pour effectuer ce trajet ?
+  description: Les suggestions sont basées sur la distance à vol d'oiseau doublée pour considérer un aller-retour.
+  suggestions: 
+    Nantes🔁Paris(A/R): 700
+    Nantes🔁Lyon(A/R): 1000
+    Nantes🔁Marseille(A/R): 1400 
+  unité: km
+  par défaut: 1000
+
+#----------------------------------------------- Avion -----------------------------------------------------
+
+transport . mobilité france . avion:
+  description: |
+    ![](https://images.unsplash.com/photo-1525624286412-4099c83c1bc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80)
+    
+    L'empreinte de l'avion est conséquente. Il n'est pas forcément plus polluant *au kilomètre* qu'une voiture qui ne déplace qu'une personne, 
+    mais la distance et surtout la distance parcourue en une heure (qu'on appelle couramment la vitesse), permet de changer de continent pour un week-end.
+    
+    Gardons aussi en tête que le Français moyen ne prend pas ou peu l'avion. L'essentiel de l'empreinte de l'aviation est donc concentrée sur 10% ou moins des Français.
+    
+  note: |
+    Nous avons fait le choix de demander le total d'heures de vol, plutôt que de demander à l'utilisateur de renseigner chacun de ses vols 
+    via l'aéroport de départ, d'arrivée et la classe économique. C'est une évolution possible par la suite, 
+    voir [ce simulateur](https://futur.eco/simulateur/transport/avion/impact) où une partie du travail est déjà faite.
+    
+    A noter aussi que les escales entrainent des décollages supplémentaires, qui consomment plus de carburant qu'une vitesse de croisière.
+    C'est aussi un paramètre à prendre en compte par la suite.
+    
+    Pour un modèle plus détaillé de l'empreinte de l'avion, nous avons trouvé deux sources.
+    
+    L'algorithme complet de l'appli North, disponible [ici](https://github.com/tmrowco/northapp-contrib/blob/master/co2eq/flights/index.js).  
+    
+    Le pseudo-algorithme de myclimate.org, ci-dessous.
+    ![](https://imgur.com/hIVvuIw.jpg).
+  formule: 
+    variations:
+      - si:
+          toutes ces conditions:
+            - transport . mobilité france . deplacantmobilite . moyen = 'avion'
+            - transport . mobilité france . deplacantmobilite      
+        alors: heures de vol * vitesse moyenne * empreinte par km
+      - sinon: 0
+
+
+transport . mobilité france . avion . vitesse moyenne:
+  formule: 5800 / 8.5
+  unité: km/h
+  note: |
+    Nous utilisons la vitesse moyenne de vol du modèle MicMac v2.6, déterminée selon [ces données](http://www.abm.fr/voyager-en-avion-le-guide-du-passager/en-complement/distances-et-durees-de-vol.html).
+
+transport . mobilité france . avion . empreinte par km:
+  formule: 0.230
+  note: |
+    Nous utilisons le facteur d'émissions de la tranche > 3500km (aller) de [ecolab-transport](https://github.com/betagouv/ecolab-transport/blob/master/ges-transport.yaml#L13).
+  unité: kgCO2e/km
+
+transport . mobilité france . avion . heures de vol:
+  question: Combien d'heures avez-vous passé ou allez-vous passer dans l'avion pour rejoindre votre lieu de mobilité (aller-retour)?
+  description: 
+  suggestions:
+    Nantes🔁Paris(A/R): 2.5
+    Nantes🔁Lyon(A/R): 2.5
+    Nantes🔁Marseille(A/R): 3
+  unité: h
+  par défaut: 3
+
+#----------------------------------------------- Bus -----------------------------------------------------
+
+transport . mobilité france . bus :
+  description: |
+    ![](https://sobusygirls.fr/uploads/editor/octobre/09-10/Les%20ongles%20de%20Laure/j-ai-teste-les-voyages-en-bus-2.jpg) 
+  formule: km * impact par km
+  unité: kgCO2e
+
+
+transport . mobilité france . bus . impact par km:
+  formule: 0.0352
+  unité: kgCO2e/km
+
+transport . mobilité france . bus . km:
+  question: Combien de kilomètres avez-vous parcouru ou allez-vous parcourir pour effectuer ce trajet ?
+  description: Les suggestions sont basées sur la distance par la route, doublée pour considérer un aller-retour.
+  suggestions: 
+    Nantes🔁Marseille(A/R): 2000
+    Nantes🔁Lille(A/R): 1200
+    Nantes🔁Toulouse(A/R): 1150
+  unité: km
+  par défaut: 1000
+
+#------------------------------------------- Mobilité Internationale ----------------------------------------------------
+
+transport . mobilité internationale:
+  applicable si: deplacantmobilite
+  description: |
+    ![](https://www.agrocampus-ouest.fr/sites/www.agrocampus-ouest.fr/files/images/menus/img-partir-semestre-etudes.jpg)
+    
+    La mobilité à l’international concerne l’année civile en cours. S’inscrivent dans cette catégorie tous les départs à l’étranger dans le cadre des études à Centrale Nantes (double diplômes, stages, semestre d’études et S8). 
+    Le but de cette question n'est pas de stigmatiser les élèves effectuant ces mobilités. En effet, au-delà de l’impact carbone, elles ont un impact social et scolaire non négligeables.
+    N’ont pas été comptés dans le calcul les éventuels retours 	au domicile familial des étudiant·e·s, car ils ont été considérés comme faisant partie de l’impact personnel de ces dernier·ère·s.
+  formule:
+    variations: 
+      - si: deplacantmobilite . moyen = 'voiture'
+        alors: transport . mobilité internationale . voiture
+      - si: deplacantmobilite . moyen = 'train'
+        alors: transport . mobilité internationale . train
+      - si: deplacantmobilite . moyen = 'avion'
+        alors: transport . mobilité internationale . avion
+      - si: deplacantmobilite . moyen = 'bus'
+        alors: transport . mobilité internationale . bus
+
+transport . mobilité internationale . deplacantmobilite:
+  question: Avez-vous effectué ou allez-vous effectuer une mobilité internationale durant cette année scolaire dans le cadre de vos études ? (hors associatif)
+  par défaut: oui
+
+transport . mobilité internationale . deplacantmobilite . moyen:
+  question: Quel moyen de transport avez-vous utilisé ou allez-vous utiliser pour votre mobilité ?
+  par défaut: "'avion'"
+  formule: 
+    une possibilité: 
+      choix obligatoire: oui
+      possibilités:
+        - voiture
+        - train
+        - avion
+        - bus
+
+transport . mobilité internationale . deplacantmobilite . moyen . voiture:
+transport . mobilité internationale . deplacantmobilite . moyen . train:  
+transport . mobilité internationale . deplacantmobilite . moyen . avion:
+transport . mobilité internationale . deplacantmobilite . moyen . bus:
+
+#----------------------------------------------- Voiture -----------------------------------------------------
+
+transport . mobilité internationale . voiture :
+  description: |
+    A compléter  
+  formule: (construction amortie + impact usage) / voyageurs
+  unité: kgCO2e
+
+
+transport . mobilité internationale . voiture . voyageurs:
+  question: Quel était le nombre moyen de voyageurs dans la voiture ?
+  par défaut: 1
+  unité: voyageurs
+  suggestions:  
+    je suis le seul: 1
+    seul ou à deux selon le trajet: 1.5
+    à deux: 2
+    à cinq: 5
+
+transport . mobilité internationale . voiture . km:
+  description: |
+    C'est la distance parcourue pour vous rendre depuis votre domicile jusqu'au lieu de votre mobilité (aller seulement)
+  question: Combien de kilomètres avez-vous parcouru ou allez-vous parcourir pour effectuer ce trajet (aller seulement)?
+  unité: km
+  suggestions: 
+    Nantes🔁Madrid(A/R): 1030
+    Nantes🔁Berlin(A/R): 1500
+    Nantes🔁Londres(A/R): 600
+  par défaut: 1000
+
+transport . mobilité internationale . voiture . impact usage:
+  formule: 2 * km * empreinte au kilomètre
+  unité: kgCO2e
+
+transport . mobilité internationale . voiture . empreinte au kilomètre: 
+  description: |
+    La valeur de l'empreinte au kilomètre pour les véhicules de l'école a été calculé en considérant une consomation moyenne de 7L au 100. 
+  formule: transport . voiture . empreinte . au kilomètre
+
+transport . mobilité internationale . voiture . construction amortie:
+  formule: transport . voiture . empreinte . construction amortie
+  unité: kgCO2e
+  note: Attention division par 0.
+
+#----------------------------------------------- Train -----------------------------------------------------
+
+transport . mobilité internationale . train:
+  description: |
+    ![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/TER_Vesoul.jpg/640px-TER_Vesoul.jpg)
+  formule: km * impact par km
+
+
+transport . mobilité internationale . train . impact par km:
+  description: En ce qui concerne le facteur d'émission, nous avons choisi de prendre la moyenne des facteurs d'émission de train en Europe.
+  formule: 0.0055
+  unité: kgCO2e/km
+
+transport . mobilité internationale . train . km:
+  question: Combien de kilomètres avez-vous parcouru ou allez-vous parcourir pour effectuer ce trajet ?
+  description: Les suggestions sont basées sur la distance à vol d'oiseau doublée pour considérer un aller-retour.
+  suggestions: 
+    Nantes🔁Edimbourg(A/R): 1500
+    Nantes🔁Hambourg(A/R): 1600
+    Nantes🔁Budapest(A/R): 3300
+  unité: km
+  par défaut: 1000
+
+#----------------------------------------------- Avion -----------------------------------------------------
+
+transport . mobilité internationale . avion:
+  description: |
+    ![](https://images.unsplash.com/photo-1525624286412-4099c83c1bc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80)
+    
+    L'empreinte de l'avion est conséquente. Il n'est pas forcément plus polluant *au kilomètre* qu'une voiture qui ne déplace qu'une personne, 
+    mais la distance et surtout la distance parcourue en une heure (qu'on appelle couramment la vitesse), permet de changer de continent pour un week-end.
+    
+    Gardons aussi en tête que le Français moyen ne prend pas ou peu l'avion. L'essentiel de l'empreinte de l'aviation est donc concentrée sur 10% ou moins des Français.
+    
+  note: |
+    Nous avons fait le choix de demander le total d'heures de vol, plutôt que de demander à l'utilisateur de renseigner chacun de ses vols 
+    via l'aéroport de départ, d'arrivée et la classe économique. C'est une évolution possible par la suite, 
+    voir [ce simulateur](https://futur.eco/simulateur/transport/avion/impact) où une partie du travail est déjà faite.
+    
+    A noter aussi que les escales entrainent des décollages supplémentaires, qui consomment plus de carburant qu'une vitesse de croisière.
+    C'est aussi un paramètre à prendre en compte par la suite.
+    
+    Pour un modèle plus détaillé de l'empreinte de l'avion, nous avons trouvé deux sources.
+    
+    L'algorithme complet de l'appli North, disponible [ici](https://github.com/tmrowco/northapp-contrib/blob/master/co2eq/flights/index.js).  
+    
+    Le pseudo-algorithme de myclimate.org, ci-dessous.
+    ![](https://imgur.com/hIVvuIw.jpg).
+  formule: 
+    variations:
+      - si:
+          toutes ces conditions:
+            - transport . mobilité internationale . deplacantmobilite . moyen = 'avion'
+            - transport . mobilité internationale . deplacantmobilite
+        alors: heures de vol * vitesse moyenne * empreinte par km
+      - sinon: 0
+
+
+transport . mobilité internationale . avion . vitesse moyenne:
+  formule: 5800 / 8.5
+  unité: km/h
+  note: |
+    Nous utilisons la vitesse moyenne de vol du modèle MicMac v2.6, déterminée selon [ces données](http://www.abm.fr/voyager-en-avion-le-guide-du-passager/en-complement/distances-et-durees-de-vol.html).
+
+transport . mobilité internationale . avion . empreinte par km:
+  formule: 0.151
+  note: |
+    Nous utilisons le facteur d'émissions de la tranche > 3500km (aller) de [ecolab-transport](https://github.com/betagouv/ecolab-transport/blob/master/ges-transport.yaml#L13).
+  unité: kgCO2e/km
+
+transport . mobilité internationale . avion . heures de vol:
+  question: Combien d'heures avez-vous passé ou allez-vous passer dans l'avion pour rejoindre votre lieu de mobilité (aller-retour)?
+  description: 
+  suggestions:
+    Paris🔁New York(A/R): 17
+    Paris🔁Pekin(A/R): 20
+    Paris🔁Sydney(A/R): 40
+  unité: h
+  par défaut: 12
+
+#----------------------------------------------- Bus -----------------------------------------------------
+
+transport . mobilité internationale . bus :
+  description: |
+    ![](https://sobusygirls.fr/uploads/editor/octobre/09-10/Les%20ongles%20de%20Laure/j-ai-teste-les-voyages-en-bus-2.jpg) 
+  formule: km * impact par km
+  unité: kgCO2e
+
+
+transport . mobilité internationale . bus . impact par km:
+  formule: 0.0352
+  unité: kgCO2e/km
+
+transport . mobilité internationale . bus . km:
+  question: Combien de kilomètres avez-vous parcouru ou allez-vous parcourir en bus pour effectuer ce trajet ?
+  description: Les suggestions sont basées sur la distance par la route, doublée pour considérer un aller-retour.
+  suggestions: 
+    Nantes🔁Madrid(A/R): 2060
+    Nantes🔁Copenhague(A/R): 3200
+    Nantes🔁Milan(A/R): 2240
+  unité: km
+  par défaut: 1000
