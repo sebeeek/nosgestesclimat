@@ -163,11 +163,13 @@ alimentation . self:
   description: Réponds oui à cette question si tu manges majoritairement au self durant ta semaine de cours 😊
   par défaut: oui
 
+# transport . domicile-travail . jours par semaine contient une info sur le nombre de jours par semaine sur campus !
+
 alimentation . plats campus:
-  titre: Empreinte de 5 repas
+  titre: Empreinte des repas sur campus
   applicable si: self
   description: |
-      A choisir : 5 plats types pour représenter une semaine complète de déjeuners sur campus (donc, petit déjeuner non inclus). 
+      A choisir : menus types pour représenter une semaine complète de déjeuners sur campus (donc, petit déjeuner non inclus). 
 
       Ceci est la somme de l'empreinte de ces 5 plats.
   formule: 
@@ -271,12 +273,11 @@ alimentation . plats perso . végétalien:
   icônes: 🌾🥜🥗
 alimentation . plats perso . végétalien . nombre:
   question: Nombre de plats végétaliens par semaine
-  par défaut: 2
-  # par défaut:
-  #   variations:
-  #     - si: déjeuner et dîner . self
-  #       alors: 1
-  #     - sinon: 2
+  par défaut:
+    variations:
+      - si: self
+        alors: 1
+      - sinon: 1
   période: semaine
 
 alimentation . plats perso . végétarien:
@@ -284,7 +285,11 @@ alimentation . plats perso . végétarien:
   icônes: 🥗🍳🧀
 alimentation . plats perso . végétarien . nombre:
   question: Nombre de plats végétariens par semaine
-  par défaut: 2
+  par défaut:
+    variations:
+      - si: self
+        alors: 2
+      - sinon: 3
   période: semaine
 
 alimentation . plats perso . viande 1:
@@ -292,7 +297,11 @@ alimentation . plats perso . viande 1:
   icônes: 🍗🥓🧀
 alimentation . plats perso . viande 1 . nombre:
   question: Nombre de plats viande 1 par semaine
-  par défaut: 2
+  par défaut:
+    variations:
+      - si: self
+        alors: 3
+      - sinon: 5
   période: semaine
 
 alimentation . plats perso . viande 2:
@@ -300,7 +309,11 @@ alimentation . plats perso . viande 2:
   icônes: 🥩🍖
 alimentation . plats perso . viande 2 . nombre:
   question: Nombre de plats végétaliens par semaine
-  par défaut: 1
+  par défaut:
+    variations:
+      - si: self
+        alors: 2
+      - sinon: 3
   période: semaine
 
 alimentation . plats perso . poisson 1:
@@ -308,7 +321,11 @@ alimentation . plats perso . poisson 1:
   icônes: 🍣🥧
 alimentation . plats perso . poisson 1 . nombre:
   question: Nombre de plats végétaliens par semaine
-  par défaut: 1
+  par défaut:
+    variations:
+      - si: self
+        alors: 1
+      - sinon: 2
   période: semaine
 
 alimentation . plats perso . poisson 2:
@@ -316,7 +333,11 @@ alimentation . plats perso . poisson 2:
   icônes: 🐟🍚
 alimentation . plats perso . poisson 2 . nombre:
   question: Nombre de plats végétaliens par semaine
-  par défaut: 1
+  par défaut:
+    variations:
+      - si: self
+        alors: 0
+      - sinon: 0
   période: semaine
 
 
