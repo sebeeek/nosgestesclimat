@@ -217,7 +217,7 @@ alimentation . plats perso . chipstotal:
   formule:
     variations: 
       - si: self
-        alors: 9
+        alors: 14 - transport . domicile-travail . jours par semaine
       - sinon: 14
 
 alimentation . plats campus . végétalien:
