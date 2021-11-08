@@ -1,9 +1,9 @@
-transport: 
+transport:
   description: |
     ![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Correspondances_Pey_Berland_août_2016.jpg/640px-Correspondances_Pey_Berland_août_2016.jpg)
-    
+
     Sans surprise, le transport ,et avant tout le transport basé sur le pétrole, constitue une part très importante de notre empreinte. 
-    Pour un·e usager·ère de l'ECN, l'impact est significatif pour les déplacements domicile-travail, les déplacements professionnels ainsi que les différentes mobilités (internationales et en France) pour les étudiant·e·s.
+    Pour un·e usager·ère de l'ECN, l'impact est significatif pour les déplacements domicile-campus, les déplacements professionnels ainsi que les différentes mobilités (internationales et en France) pour les étudiant·e·s.
   titre: Transport
   couleur: '#b71540'
   icônes: 🚦
@@ -11,16 +11,16 @@ transport:
 transport . empreinte:
   description: |
     ![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Correspondances_Pey_Berland_août_2016.jpg/640px-Correspondances_Pey_Berland_août_2016.jpg)
-    
+
     Sans surprise, le transport et avant tout le transport basé sur le pétrole constitue une part très importante de notre empreinte.
-  
+
   formule:
     somme:
-      - domicile-travail
+      - domicile-campus
       - mobilité france
       - mobilité internationale
       - perso
-    
+
 transport . perso:
   applicable si: présent
   formule: 3000

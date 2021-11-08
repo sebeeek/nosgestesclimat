@@ -1,19 +1,19 @@
-
+---
 #------------------------------------------- Domicile-Campus -------------------------------------------
 
-transport . domicile-travail:
+transport . domicile-campus:
   description: |
     ![](https://www.mobilitytechgreen.com/wp-content/uploads/2017/08/bicyclecommute.jpg)
-    
-    Les déplacements pendulaires (du domicile jusqu’à l’école) représentent une part importante du bilan carbone de l’école. En 2018, les émissions associées à ce poste s’élevaient à 599 tCO2eq, soit environ 11% du bilan carbone total. 
-    Des disparités entre les catégories d’usager·ère·s étaient visibles, dues aux habitudes de transport de chacun·e, mais également de l’éloignement par rapport à l’établissement. Les automobilistes représentent la majeure partie des émissions liées aux déplacements domicile-travail.
-  formule:  # Ici nous pourrions utiliser un "non applicable si: jours par semaine = 0" mais un bug fait que la question km deviendra booléenne Oui/Non. Voir https://github.com/betagouv/mon-entreprise/issues/1367
-    variations:
-    - si: jours par semaine = 0
-      alors: 0
-    - sinon: moyens de transport * facteur aller-retour
 
-transport . domicile-travail . jours par semaine:
+    Les déplacements pendulaires (du domicile jusqu’à l’école) représentent une part importante du bilan carbone de l’école. En 2018, les émissions associées à ce poste s’élevaient à 599 tCO2eq, soit environ 11% du bilan carbone total. 
+    Des disparités entre les catégories d’usager·ère·s étaient visibles, dues aux habitudes de transport de chacun·e, mais également de l’éloignement par rapport à l’établissement. Les automobilistes représentent la majeure partie des émissions liées aux déplacements domicile-campus.
+  formule: # Ici nous pourrions utiliser un "non applicable si: jours par semaine = 0" mais un bug fait que la question km deviendra booléenne Oui/Non. Voir https://github.com/betagouv/mon-entreprise/issues/1367
+    variations:
+      - si: jours par semaine = 0
+        alors: 0
+      - sinon: moyens de transport * facteur aller-retour
+
+transport . domicile-campus . jours par semaine:
   question: En moyenne, combien de jours par semaine te rends-tu sur ton campus ?
   par défaut: 5
   unité: jours
@@ -25,25 +25,25 @@ transport . domicile-travail . jours par semaine:
     4 fois/semaine: 4
     tous les jours: 5
 
-transport . domicile-travail . moyens de transport:
+transport . domicile-campus . moyens de transport:
   titre: Proportions moyens de transport
   description: |
     A répartir parmi 6 moyens de transport qu'un usager de l'ECN est susceptible de prendre pour se rendre à Centrale (combinaisons possibles).
-  formule: 
+  formule:
     somme:
       - neutre
       - voiture
-      - tram 
+      - tram
       - bus
       - train
       - deux roues
 
-transport . domicile-travail . aller-retour:
-  description: Augmentation de la part de transport Domicile-Travail de 20%, 60% ou 100% respectivement pour de temps en temps (1 fois sur 5), souvent (3 fois sur 5) et tous les jours. 
+transport . domicile-campus . aller-retour:
+  description: Augmentation de la part de transport Domicile-Travail de 20%, 60% ou 100% respectivement pour de temps en temps (1 fois sur 5), souvent (3 fois sur 5) et tous les jours.
   question: Vous arrive-t-il de faire un aller-retour dans la journée (pour la pause-dej par exemple)?
   par défaut: "'jamais'"
-  formule: 
-    une possibilité: 
+  formule:
+    une possibilité:
       choix obligatoire: oui
       possibilités:
         - jamais
@@ -51,14 +51,14 @@ transport . domicile-travail . aller-retour:
         - souvent
         - tous les jours
 
-transport . domicile-travail . aller-retour . jamais:
-transport . domicile-travail . aller-retour . de temps en temps:
-transport . domicile-travail . aller-retour . souvent:
-transport . domicile-travail . aller-retour . tous les jours:
+transport . domicile-campus . aller-retour . jamais:
+transport . domicile-campus . aller-retour . de temps en temps:
+transport . domicile-campus . aller-retour . souvent:
+transport . domicile-campus . aller-retour . tous les jours:
 
-transport . domicile-travail . facteur aller-retour: 
-  formule: 
-    variations: 
+transport . domicile-campus . facteur aller-retour:
+  formule:
+    variations:
       - si: aller-retour = 'jamais'
         alors: 1
       - si: aller-retour = 'de temps en temps'
@@ -69,7 +69,7 @@ transport . domicile-travail . facteur aller-retour:
         alors: 2
 #------------------------------------------- moyens de transport Neutre -------------------------------------------
 
-transport . domicile-travail . moyens de transport . neutre:
+transport . domicile-campus . moyens de transport . neutre:
   titre: Marche ou vélo (non électrique)
   description: |
     Je marche ou je pédale à hauteur de :
@@ -81,15 +81,14 @@ transport . domicile-travail . moyens de transport . neutre:
   icônes: 🚲
   formule: 0 * pourcent / 100
 
-transport . domicile-travail . moyens de transport . neutre . pourcent:
+transport . domicile-campus . moyens de transport . neutre . pourcent:
   question: Part de la marche ou vélo dans la répartition des moyens de transport sur la semaine
   par défaut: 50
   période: semaine
-  
 
 #------------------------------------------- moyen de transport Voiture -------------------------------------------
 
-transport . domicile-travail . moyens de transport . voiture :
+transport . domicile-campus . moyens de transport . voiture:
   titre: Voiture
   description: |
     J'utilise la voiture à hauteur de :
@@ -98,27 +97,27 @@ transport . domicile-travail . moyens de transport . voiture :
 
     La voiture est aujourd’hui en France essentiellement thermique (essence ou diesel) bien que l’électrique progresse lentement. 
     En France, on émet en moyenne 193 gCO2eq/km parcouru en voiture. Ce chiffre comprend les émissions dues à la combustion du carburant mais également celles dues à la fabrication. Il faut également noter qu’une voiture française transporte en moyenne 1,6 passager.
-    
-  icônes: 🚗
-  formule: 
-    variations: 
-    - si: pourcent = 0
-      alors: 0
-    - sinon: pourcent / 100 * (transport . voiture . empreinte . construction amortie + usage) / voyageurs
 
-transport . domicile-travail . moyens de transport . voiture . pourcent:
+  icônes: 🚗
+  formule:
+    variations:
+      - si: pourcent = 0
+        alors: 0
+      - sinon: pourcent / 100 * (transport . voiture . empreinte . construction amortie + usage) / voyageurs
+
+transport . domicile-campus . moyens de transport . voiture . pourcent:
   question: Part de la voiture dans la répartition des moyens de transport sur la semaine
   par défaut: 0
   période: semaine
 
-transport . domicile-travail . moyens de transport . voiture . km trajet:
+transport . domicile-campus . moyens de transport . voiture . km trajet:
   question: Quelle est la distance moyenne de votre trajet en voiture (aller simple)?
   description: |
     Ne comptez que les kilomètres d'*un* trajet pour rejoindre votre lieu de travail habituel ou un point relais depuis votre domicile.
     Par exemple, si vous êtes en mission professionnelle dans un autre département ou un autre pays : ne le comptez pas ici.
-    
+
     Nous parlons donc ici de la distance *aller* que vous effectuez en voiture.
-    
+
     70% des travailleurs en France travaillent à moins de 15km de chez eux.
 
     57% travaillent à moins de 10km et 78% à moins de 20km. 
@@ -132,182 +131,180 @@ transport . domicile-travail . moyens de transport . voiture . km trajet:
     20km: 20
     30km: 30
 
-transport . domicile-travail . moyens de transport . voiture . km:
+transport . domicile-campus . moyens de transport . voiture . km:
   description: |
     Distance moyenne parcourue par l'usager à l'année.
   unité: km
-  formule: km trajet * 2 * (étudiant . nbre semaines * domicile-travail . jours par semaine)
+  formule: km trajet * 2 * (étudiant . nbre semaines * domicile-campus . jours par semaine)
 
-transport . domicile-travail . moyens de transport . voiture . usage:
+transport . domicile-campus . moyens de transport . voiture . usage:
   formule: km * transport . voiture . empreinte . au kilomètre
   unité: kgCO2e
 
-transport . domicile-travail . moyens de transport . voiture . voyageurs:
+transport . domicile-campus . moyens de transport . voiture . voyageurs:
   question: Quel est le nombre moyen de voyageurs dans la voiture ?
   par défaut: 1
   unité: voyageurs
-  suggestions:  
+  suggestions:
     je suis le seul: 1
     seul ou à deux selon le trajet: 1.5
     à deux: 2
     à cinq: 5
-  
+
 #------------------------------------------- moyen de transport Tram -------------------------------------------
 
-transport . domicile-travail . moyens de transport . tram:
-  titre : tram
+transport . domicile-campus . moyens de transport . tram:
+  titre: tram
   description: |
     J'utilise le tram à hauteur de :
 
     ![](https://upload.wikimedia.org/wikipedia/commons/d/de/Tram-de-Nantes.jpg) 🚄
   icônes: 🚋
-  formule: 
-    variations: 
-    - si: pourcent = 0
-      alors: 0
-    - sinon: pourcent / 100 * heures par jour * impact par heure * étudiant . nbre semaines * domicile-travail . jours par semaine
+  formule:
+    variations:
+      - si: pourcent = 0
+        alors: 0
+      - sinon: pourcent / 100 * heures par jour * impact par heure * étudiant . nbre semaines * domicile-campus . jours par semaine
 
-transport . domicile-travail . moyens de transport . tram . pourcent:
+transport . domicile-campus . moyens de transport . tram . pourcent:
   question: Part du tram dans la répartition des moyens de transport sur la semaine
   par défaut: 50
   période: semaine
 
-transport . domicile-travail . moyens de transport . tram . impact par heure:
+transport . domicile-campus . moyens de transport . tram . impact par heure:
   formule: 22 * 0.00298
   unité: kgCO2e/heures
-  note: Nous avons confondu tram et métro, alors que le modèle MicMac v2.6 ne parle que de métro. 
+  note: Nous avons confondu tram et métro, alors que le modèle MicMac v2.6 ne parle que de métro.
   description: |
     Sur la base de 2,98 gCO2e/(passager.km) et de 22 km/h de vitesse moyenne. Vitesse calculée selon le temps nécessaire au tramway pour parcourir les lignes ; Base Carbone consultée le 04/12/20 - Métro, tramway, trolleybus - 2018 - Agglomération > à 250 000 habitants
-  références: 
-   - https://fr.wikipedia.org/wiki/Tramway_de_Nantes
-   - http://www.bilans-ges.ademe.fr/
+  références:
+    - https://fr.wikipedia.org/wiki/Tramway_de_Nantes
+    - http://www.bilans-ges.ademe.fr/
 
-transport . domicile-travail . moyens de transport . tram . minutes par trajet:
-  applicable si: pourcent > 0 
+transport . domicile-campus . moyens de transport . tram . minutes par trajet:
+  applicable si: pourcent > 0
   question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
-  suggestions: 
+  suggestions:
     10 minutes / trajet: 10
     20 minutes / trajet: 20
     30 minutes / jour: 30
   unité: minutes/trajet
   par défaut: 15
 
-transport . domicile-travail . moyens de transport . tram . heures par jour:
+transport . domicile-campus . moyens de transport . tram . heures par jour:
   formule: 2 * minutes par trajet / 60
   unité: heures/jour
 
 #------------------------------------------- moyen de transport Bus -------------------------------------------
 
-transport . domicile-travail . moyens de transport . bus:
+transport . domicile-campus . moyens de transport . bus:
   titre: bus
   description: |
     J'utilise le bus à hauteur de :
 
     ![](https://upload.wikimedia.org/wikipedia/commons/d/d8/Busway%2C_TAN_%28NANTES%2CFR44%29.jpg)
   icônes: 🚌
-  formule: 
-    variations: 
-    - si: pourcent = 0
-      alors: 0
-    - sinon: pourcent / 100 * heures par jour * impact par heure * étudiant . nbre semaines * domicile-travail . jours par semaine
+  formule:
+    variations:
+      - si: pourcent = 0
+        alors: 0
+      - sinon: pourcent / 100 * heures par jour * impact par heure * étudiant . nbre semaines * domicile-campus . jours par semaine
 
-
-transport . domicile-travail . moyens de transport . bus . pourcent:
+transport . domicile-campus . moyens de transport . bus . pourcent:
   question: Part du bus dans la répartition des moyens de transport sur la semaine
   par défaut: 0
   période: semaine
 
-transport . domicile-travail . moyens de transport . bus . impact par heure:
+transport . domicile-campus . moyens de transport . bus . impact par heure:
   formule: 0.129 * 15
   unité: kgCO2e/heure
   description: |
     Sur la base de 129 gCO2e/(passager.km) et de 12 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - Autobus moyen - Agglomération de plus de 250 000 habitants ;
     - http://www.bilans-ges.ademe.fr/
-  références: 
+  références:
     - https://www.lemonde.fr/blog/transports/2016/06/15/dans-les-villes-moyennes-des-bus-rapides-mais-vides-et-couteux/
     - http://www.bilans-ges.ademe.fr/
 
-transport . domicile-travail . moyens de transport . bus . minutes par trajet:
+transport . domicile-campus . moyens de transport . bus . minutes par trajet:
   question: Combien de temps, en moyenne, dure votre trajet en bus (aller simple)?
-  suggestions: 
+  suggestions:
     10 minutes / trajet: 10
     20 minutes / trajet: 20
     30 minutes / jour: 30
   unité: minutes/trajet
   par défaut: 15
 
-transport . domicile-travail . moyens de transport . bus . heures par jour:
+transport . domicile-campus . moyens de transport . bus . heures par jour:
   formule: 2 * minutes par trajet / 60
   unité: heures/jour
 
 #------------------------------------------- moyen de transport Train -------------------------------------------
 
-transport . domicile-travail . moyens de transport . train:
+transport . domicile-campus . moyens de transport . train:
   titre: train
   description: |
     J'utilise le train à hauteur de :
 
     ![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Alliance_Auch_ligne_6_Allées_Baylac.JPG/640px-Alliance_Auch_ligne_6_Allées_Baylac.JPG)
   icônes: 🚂
-  formule: 
-    variations: 
-    - si: pourcent = 0
-      alors: 0
-    - sinon: pourcent / 100 * heures par jour * impact par heure * étudiant . nbre semaines * domicile-travail . jours par semaine
+  formule:
+    variations:
+      - si: pourcent = 0
+        alors: 0
+      - sinon: pourcent / 100 * heures par jour * impact par heure * étudiant . nbre semaines * domicile-campus . jours par semaine
 
-
-transport . domicile-travail . moyens de transport . train . pourcent:
+transport . domicile-campus . moyens de transport . train . pourcent:
   question: Part du train dans la répartition des moyens de transport sur la semaine
   par défaut: 0
   période: semaine
 
-transport . domicile-travail . moyens de transport . train . impact par heure:
+transport . domicile-campus . moyens de transport . train . impact par heure:
   formule: 0.0248 * 135
   unité: kgCO2e/heure
   description: |
     Sur la base de 24.8 gCO2e/(passager.km) et de 135 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - TER - 2019 - Traction moyenne ; vitesse calculée sur la base du trajet TER Nantes-Angers
-  références: 
+  références:
     - http://www.bilans-ges.ademe.fr/
 
-transport . domicile-travail . moyens de transport . train . minutes par trajet:
+transport . domicile-campus . moyens de transport . train . minutes par trajet:
   question: Combien de temps, en moyenne, dure votre trajet en train (aller simple)?
-  suggestions: 
+  suggestions:
     20 minutes / trajet: 20
     30 minutes / jour: 30
     1 heure / trajet: 60
   unité: minutes/trajet
   par défaut: 15
 
-transport . domicile-travail . moyens de transport . train . heures par jour:
+transport . domicile-campus . moyens de transport . train . heures par jour:
   formule: 2 * minutes par trajet / 60
   unité: heures/jour
 
 #------------------------------------------- moyen de transport Scooter/moto -------------------------------------------
 
-transport . domicile-travail . moyens de transport . deux roues :
+transport . domicile-campus . moyens de transport . deux roues:
   titre: Deux-roues
   description: |
     J'utilise un deux-roues à hauteur de :
   icônes: 🏍
-  formule: 
-    variations: 
-    - si: pourcent = 0
-      alors: 0
-    - sinon: pourcent / 100 * km * empreinte au kilomètre
+  formule:
+    variations:
+      - si: pourcent = 0
+        alors: 0
+      - sinon: pourcent / 100 * km * empreinte au kilomètre
 
-transport . domicile-travail . moyens de transport . deux roues . pourcent:
+transport . domicile-campus . moyens de transport . deux roues . pourcent:
   question: Part des deux-roues dans la répartition des moyens de transport sur la semaine
   par défaut: 0
   période: semaine
 
-transport . domicile-travail . moyens de transport . deux roues . km trajet :
+transport . domicile-campus . moyens de transport . deux roues . km trajet:
   question: Quelle est la distance moyenne de votre trajet en deux-roues (aller simple)?
   description: |
     Ne comptez que les kilomètres d'*un* trajet pour rejoindre votre lieu de travail habituel ou un point relais depuis votre domicile.
     Par exemple, si vous êtes en mission professionnelle dans un autre département ou un autre pays : ne le comptez pas ici.
-    
+
     Nous parlons donc ici de la distance *aller* que vous effectuez en 2 roues.
-    
+
     70% des travailleurs en France travaillent à moins de 15km de chez eux.
 
     57% travaillent à moins de 10km et 78% à moins de 20km. 
@@ -321,15 +318,15 @@ transport . domicile-travail . moyens de transport . deux roues . km trajet :
     20km: 20
     30km: 30
 
-transport . domicile-travail . moyens de transport . deux roues . km:
+transport . domicile-campus . moyens de transport . deux roues . km:
   description: |
     Distance moyenne parcourue par l'usager à l'année en deux-roues.
   unité: km
-  formule: km trajet * 2 * (étudiant . nbre semaines * domicile-travail . jours par semaine)
+  formule: km trajet * 2 * (étudiant . nbre semaines * domicile-campus . jours par semaine)
 
-transport . domicile-travail . moyens de transport . deux roues . empreinte au kilomètre: 
-  formule: 
-    variations: 
+transport . domicile-campus . moyens de transport . deux roues . empreinte au kilomètre:
+  formule:
+    variations:
       - si: type = 'moto plus de 250cm3'
         alors: 0.168
       - si: type = 'moto moins de 250cm3'
@@ -343,12 +340,12 @@ transport . domicile-travail . moyens de transport . deux roues . empreinte au k
   references: http://www.bilans-ges.ademe.fr/
   note: hypothèse pour le scooter electrique (pas de ref)
 
-transport . domicile-travail . moyens de transport . deux roues . type: 
+transport . domicile-campus . moyens de transport . deux roues . type:
   question: Quel type de deux-roues utilisez-vous ?
   description: Si vous utilisez plusieurs modes de transport parmi les suivants, choisissez la réponse la plus représentative de votre usage.
   par défaut: "'scooter thermique'"
   formule:
-    une possibilité: 
+    une possibilité:
       choix obligatoire: oui
       possibilités:
         - moto plus de 250cm3
@@ -356,8 +353,8 @@ transport . domicile-travail . moyens de transport . deux roues . type:
         - scooter thermique
         - scooter électrique
         - vélo électrique
-transport . domicile-travail . moyens de transport . deux roues . type . moto plus de 250cm3:
-transport . domicile-travail . moyens de transport . deux roues . type . moto moins de 250cm3:
-transport . domicile-travail . moyens de transport . deux roues . type . scooter thermique:
-transport . domicile-travail . moyens de transport . deux roues . type . scooter électrique:
-transport . domicile-travail . moyens de transport . deux roues . type . vélo électrique:
+transport . domicile-campus . moyens de transport . deux roues . type . moto plus de 250cm3:
+transport . domicile-campus . moyens de transport . deux roues . type . moto moins de 250cm3:
+transport . domicile-campus . moyens de transport . deux roues . type . scooter thermique:
+transport . domicile-campus . moyens de transport . deux roues . type . scooter électrique:
+transport . domicile-campus . moyens de transport . deux roues . type . vélo électrique:
