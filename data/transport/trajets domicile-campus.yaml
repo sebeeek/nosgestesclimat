@@ -14,7 +14,7 @@ transport . domicile-campus:
       - sinon: moyens de transport * facteur aller-retour
 
 transport . domicile-campus . jours par semaine:
-  question: En moyenne, combien de jours par semaine te rends-tu sur ton campus ?
+  question: 🎓 En moyenne, combien de jours par semaine te rends-tu sur ton campus ?
   par défaut: 5
   unité: jours
   suggestions:
@@ -40,7 +40,7 @@ transport . domicile-campus . moyens de transport:
 
 transport . domicile-campus . aller-retour:
   description: Augmentation de la part de transport Domicile-Travail de 20%, 60% ou 100% respectivement pour de temps en temps (1 fois sur 5), souvent (3 fois sur 5) et tous les jours.
-  question: Vous arrive-t-il de faire un aller-retour dans la journée (pour la pause-dej par exemple)?
+  question: 🎓 Vous arrive-t-il de faire un aller-retour dans la journée (pour la pause-dej par exemple)?
   par défaut: "'jamais'"
   formule:
     une possibilité:
@@ -111,7 +111,7 @@ transport . domicile-campus . moyens de transport . voiture . pourcent:
   période: semaine
 
 transport . domicile-campus . moyens de transport . voiture . km trajet:
-  question: Quelle est la distance moyenne de votre trajet en voiture (aller simple)?
+  question: 🎓 Quelle est la distance moyenne de votre trajet en voiture (aller simple)?
   description: |
     Ne comptez que les kilomètres d'*un* trajet pour rejoindre votre lieu de travail habituel ou un point relais depuis votre domicile.
     Par exemple, si vous êtes en mission professionnelle dans un autre département ou un autre pays : ne le comptez pas ici.
@@ -183,7 +183,7 @@ transport . domicile-campus . moyens de transport . tram . impact par heure:
 
 transport . domicile-campus . moyens de transport . tram . minutes par trajet:
   applicable si: pourcent > 0
-  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  question: 🎓 Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
   suggestions:
     10 minutes / trajet: 10
     20 minutes / trajet: 20
@@ -226,7 +226,7 @@ transport . domicile-campus . moyens de transport . bus . impact par heure:
     - http://www.bilans-ges.ademe.fr/
 
 transport . domicile-campus . moyens de transport . bus . minutes par trajet:
-  question: Combien de temps, en moyenne, dure votre trajet en bus (aller simple)?
+  question: 🎓 Combien de temps, en moyenne, dure votre trajet en bus (aller simple)?
   suggestions:
     10 minutes / trajet: 10
     20 minutes / trajet: 20
@@ -267,7 +267,7 @@ transport . domicile-campus . moyens de transport . train . impact par heure:
     - http://www.bilans-ges.ademe.fr/
 
 transport . domicile-campus . moyens de transport . train . minutes par trajet:
-  question: Combien de temps, en moyenne, dure votre trajet en train (aller simple)?
+  question: 🎓 Combien de temps, en moyenne, dure votre trajet en train (aller simple)?
   suggestions:
     20 minutes / trajet: 20
     30 minutes / jour: 30
@@ -298,7 +298,7 @@ transport . domicile-campus . moyens de transport . deux roues . pourcent:
   période: semaine
 
 transport . domicile-campus . moyens de transport . deux roues . km trajet:
-  question: Quelle est la distance moyenne de votre trajet en deux-roues (aller simple)?
+  question: 🎓 Quelle est la distance moyenne de votre trajet en deux-roues (aller simple)?
   description: |
     Ne comptez que les kilomètres d'*un* trajet pour rejoindre votre lieu de travail habituel ou un point relais depuis votre domicile.
     Par exemple, si vous êtes en mission professionnelle dans un autre département ou un autre pays : ne le comptez pas ici.
