@@ -201,7 +201,7 @@ logement . chauffage . électricité:
 
 logement . chauffage . électricité . présent:
   question: Votre logement est-il chauffé à l'électricité ?
-  par défaut: non
+  par défaut: oui
 
 logement . chauffage . bois:
   icônes: 🪵
