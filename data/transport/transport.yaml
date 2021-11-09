@@ -16,6 +16,7 @@ transport . empreinte:
 
   formule:
     somme:
+      - voiture . empreinte
       - domicile-campus
       - mobilité france
       - mobilité internationale
