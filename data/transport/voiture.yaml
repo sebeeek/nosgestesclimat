@@ -19,7 +19,7 @@ transport . voiture . utilisation:
   par défaut: oui
 
 transport . voiture . empreinte:
-  non applicable si: km = 0
+  applicable si: utilisation
   formule: (construction amortie + usage) / voyageurs
   unité: kgCO2e
 
@@ -45,7 +45,7 @@ transport . voiture . voyageurs:
     cinq: 5
 
 transport . voiture . km:
-  applicable si: voiture . utilisation
+  applicable si: utilisation
   titre: Km en voiture
   question: Quelle distance parcoures-tu à l'année en voiture pour tes déplacements personnels ?
   description: |
