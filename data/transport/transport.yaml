@@ -20,12 +20,4 @@ transport . empreinte:
       - domicile-campus
       - mobilité france
       - mobilité internationale
-      - perso
-
-transport . perso:
-  applicable si: présent
-  formule: 3000
-
-transport . perso . présent:
-  question: test ?
-  par défaut: oui
+      - autres déplacements

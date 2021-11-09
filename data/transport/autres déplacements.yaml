@@ -1,0 +1,155 @@
+transport . autres déplacements:
+  titre: Autres déplacements (annuel)
+  formule:
+    somme:
+      - métro
+      - tram
+      - bus
+      - train
+      - avion
+
+transport . autres déplacements . métro:
+  titre: métro
+  icônes: 🚉
+  formule: empreinte
+
+transport . autres déplacements . métro . présent:
+  question: Utilises-tu le tram ?
+  par défaut: oui
+
+transport . autres déplacements . métro . empreinte:
+  applicable si: présent
+  formule: impact par heure * heures par semaine * nbre semaines
+
+transport . autres déplacements . métro . impact par heure:
+  formule: 22 * 0.00298
+  unité: kgCO2e/heures
+  note: Nous avons confondu tram et métro, alors que le modèle MicMac v2.6 ne parle que de métro.
+  description: |
+    Sur la base de 2,98 gCO2e/(passager.km) et de 22 km/h de vitesse moyenne. Vitesse calculée selon le temps nécessaire au tramway pour parcourir les lignes ; Base Carbone consultée le 04/12/20 - Métro, tramway, trolleybus - 2018 - Agglomération > à 250 000 habitants
+  références:
+    - https://fr.wikipedia.org/wiki/Tramway_de_Nantes
+    - http://www.bilans-ges.ademe.fr/
+
+transport . autres déplacements . métro . heures par semaine:
+  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  suggestions:
+    a faire: 10
+  unité: heures/semaine
+  par défaut: 2
+
+transport . autres déplacements . tram:
+  titre: tram
+  icônes: 🚋
+  formule: empreinte
+
+transport . autres déplacements . tram . présent:
+  question: Utilises-tu le tram ?
+  par défaut: oui
+
+transport . autres déplacements . tram . empreinte:
+  applicable si: présent
+  formule: impact par heure * heures par semaine * nbre semaines
+
+transport . autres déplacements . tram . impact par heure:
+  formule: 22 * 0.00298
+  unité: kgCO2e/heures
+  note: Nous avons confondu tram et métro, alors que le modèle MicMac v2.6 ne parle que de métro.
+  description: |
+    Sur la base de 2,98 gCO2e/(passager.km) et de 22 km/h de vitesse moyenne. Vitesse calculée selon le temps nécessaire au tramway pour parcourir les lignes ; Base Carbone consultée le 04/12/20 - Métro, tramway, trolleybus - 2018 - Agglomération > à 250 000 habitants
+  références:
+    - https://fr.wikipedia.org/wiki/Tramway_de_Nantes
+    - http://www.bilans-ges.ademe.fr/
+
+transport . autres déplacements . tram . heures par semaine:
+  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  suggestions:
+    a faire: 10
+  unité: heures/semaine
+  par défaut: 2
+
+transport . autres déplacements . bus:
+  titre: bus
+  icônes: 🚌
+  formule: empreinte
+
+transport . autres déplacements . bus . présent:
+  question: Utilises-tu le tram ?
+  par défaut: oui
+
+transport . autres déplacements . bus . empreinte:
+  applicable si: présent
+  formule: impact par heure * heures par semaine * nbre semaines
+
+transport . autres déplacements . bus . impact par heure:
+  formule: 0.129 * 15
+  unité: kgCO2e/heure
+  description: |
+    Sur la base de 129 gCO2e/(passager.km) et de 12 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - Autobus moyen - Agglomération de plus de 250 000 habitants ;
+    - http://www.bilans-ges.ademe.fr/
+  références:
+    - https://www.lemonde.fr/blog/transports/2016/06/15/dans-les-villes-moyennes-des-bus-rapides-mais-vides-et-couteux/
+    - http://www.bilans-ges.ademe.fr/
+
+transport . autres déplacements . bus . heures par semaine:
+  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  suggestions:
+    a faire: 10
+  unité: heures/semaine
+  par défaut: 2
+
+transport . autres déplacements . train:
+  titre: train
+  icônes: 🚂
+  formule: empreinte
+
+transport . autres déplacements . train . présent:
+  question: Utilises-tu le tram ?
+  par défaut: oui
+
+transport . autres déplacements . train . empreinte:
+  applicable si: présent
+  formule: impact par heure * heures par mois * nbre mois
+
+transport . autres déplacements . train . impact par heure:
+  formule: 0.0248 * 135
+  unité: kgCO2e/heure
+  description: |
+    Sur la base de 24.8 gCO2e/(passager.km) et de 135 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - TER - 2019 - Traction moyenne ; vitesse calculée sur la base du trajet TER Nantes-Angers
+  références:
+    - http://www.bilans-ges.ademe.fr/
+
+transport . autres déplacements . train . heures par mois:
+  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  suggestions:
+    a faire: 10
+  unité: heures/mois
+  par défaut: 2
+
+transport . autres déplacements . avion:
+  titre: avion
+  icônes: ✈️
+  formule: empreinte
+
+transport . autres déplacements . avion . présent:
+  question: Utilises-tu l'avion ?
+  par défaut: non
+
+transport . autres déplacements . avion . empreinte:
+  applicable si: présent
+  formule: impact par heure * heures par an * nbre mois
+
+transport . autres déplacements . avion . impact par heure:
+  formule: 0.0248 * 135
+  unité: kgCO2e/heure
+  description: |
+    Sur la base de 24.8 gCO2e/(passager.km) et de 135 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - TER - 2019 - Traction moyenne ; vitesse calculée sur la base du trajet TER Nantes-Angers
+  références:
+    - http://www.bilans-ges.ademe.fr/
+
+transport . autres déplacements . avion . heures par an:
+  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  suggestions:
+    a faire: 10
+  unité: heures/mois
+  par défaut: 2
