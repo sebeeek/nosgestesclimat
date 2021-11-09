@@ -152,7 +152,7 @@ alimentation . déjeuner et dîner . par semaine:
   formule: plats campus + plats perso
 
 alimentation . self:
-  question: En général, lorsque tu es en cours, manges-tu au self / restaurant universitaire ?
+  question: 🎓 En général, lorsque tu es en cours, manges-tu au self / restaurant universitaire ?
   description: Réponds oui à cette question si tu manges majoritairement au self durant ta semaine de cours 😊
   par défaut: oui
 
