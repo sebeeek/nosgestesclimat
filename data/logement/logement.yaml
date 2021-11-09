@@ -76,7 +76,7 @@ logement . âge:
     un siècle: 100 ans
 
 logement . campus:
-  question: Es-tu logé sur le campus de ton école ?
+  question: 🎓 Es-tu logé sur le campus de ton école ?
   par défaut: oui
 
 logement . type:
