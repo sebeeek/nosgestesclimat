@@ -14,7 +14,7 @@ transport . autres déplacements . métro:
   formule: empreinte
 
 transport . autres déplacements . métro . présent:
-  question: Utilises-tu le tram ?
+  question: Utilises-tu le métro ?
   par défaut: oui
 
 transport . autres déplacements . métro . empreinte:
@@ -28,11 +28,10 @@ transport . autres déplacements . métro . impact par heure:
   description: |
     Sur la base de 2,98 gCO2e/(passager.km) et de 22 km/h de vitesse moyenne. Vitesse calculée selon le temps nécessaire au tramway pour parcourir les lignes ; Base Carbone consultée le 04/12/20 - Métro, tramway, trolleybus - 2018 - Agglomération > à 250 000 habitants
   références:
-    - https://fr.wikipedia.org/wiki/Tramway_de_Nantes
     - http://www.bilans-ges.ademe.fr/
 
 transport . autres déplacements . métro . heures par semaine:
-  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  question: Combien de temps, en moyenne, passes-tu dans le métro chaque semaine ?
   suggestions:
     a faire: 10
   unité: heures/semaine
@@ -62,7 +61,7 @@ transport . autres déplacements . tram . impact par heure:
     - http://www.bilans-ges.ademe.fr/
 
 transport . autres déplacements . tram . heures par semaine:
-  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  question: Combien de temps, en moyenne, passes-tu dans le tramway chaque semaine ?
   suggestions:
     a faire: 10
   unité: heures/semaine
@@ -74,7 +73,7 @@ transport . autres déplacements . bus:
   formule: empreinte
 
 transport . autres déplacements . bus . présent:
-  question: Utilises-tu le tram ?
+  question: Utilises-tu le bus ?
   par défaut: oui
 
 transport . autres déplacements . bus . empreinte:
@@ -92,7 +91,7 @@ transport . autres déplacements . bus . impact par heure:
     - http://www.bilans-ges.ademe.fr/
 
 transport . autres déplacements . bus . heures par semaine:
-  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  question: Combien de temps, en moyenne, passes-tu dans le bus chaque semaine ?
   suggestions:
     a faire: 10
   unité: heures/semaine
@@ -120,7 +119,7 @@ transport . autres déplacements . train . impact par heure:
     - http://www.bilans-ges.ademe.fr/
 
 transport . autres déplacements . train . heures par mois:
-  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  question: Combien de temps, en moyenne, passes-tu dans le train chaque mois ?
   suggestions:
     a faire: 10
   unité: heures/mois
@@ -148,7 +147,7 @@ transport . autres déplacements . avion . impact par heure:
     - http://www.bilans-ges.ademe.fr/
 
 transport . autres déplacements . avion . heures par an:
-  question: Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  question: Combien de temps, en moyenne, passes-tu dans l'avion chaque année ?
   suggestions:
     a faire: 10
   unité: heures/mois

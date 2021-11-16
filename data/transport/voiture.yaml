@@ -33,8 +33,6 @@ transport . voiture . voyageurs:
     Essayez d'estimer une moyenne approximative : si tous les jours vous prenez la voiture tout seul, mettez 1 ou 1,2.
     Si vous ne la prenez qu'en famille ou entre amis, mettez 3 ou 4.
 
-    > Dans une prochaine évolution du simulateur, nous pourrons séparer les questions par type de trajets : vacances, domicile-campus, quotidiens avec un nombre de voyageur personnalisable.
-
     Bien sûr, si vous vous faites conduire ou si vous prenez le taxi, le chauffeur ne compte pas, car il est au service de votre déplacement.
 
   par défaut: 1.2 voyageurs
@@ -62,7 +60,7 @@ transport . voiture . km:
     1000km / mois: 12000 km/an
 
 transport . voiture . motorisation:
-  question: Quel type de voiture utilisez-vous ?
+  question: Quel type de voiture utilises-tu ?
   description: |
     Si vous utilisez plusieurs voitures (par exemple dans le cas où vous n'en possédez pas une), choisissez la réponse la plus représentative de votre usage.
 
@@ -106,7 +104,7 @@ transport . voiture . gabarit . berline:
 transport . voiture . gabarit . SUV:
 
 transport . voiture . thermique . consommation aux 100:
-  question: Connaissez-vous la consommation moyenne de la voiture ?
+  question: Connais-tu la consommation moyenne de la voiture ?
   description: |
     Comme pour la motorisation, si vous utilisez plusieurs voitures (par exemple dans le cas où vous n'en possédez pas une), choisissez la réponse la plus représentative de votre usage.
 
@@ -279,7 +277,7 @@ transport . voiture . âge:
     toutes ces conditions:
       - km > 0
       - propriétaire # Nous ne devrions pas avoir à poser ces conditions. Publicodes devrait déterminer lui-même qu'elles sont à poser après la question des km et la question propriétaire, mais la nouvelle version de publicodes a perdu ce côté magique.
-  question: Quel est l'âge de votre voiture ?
+  question: Quel est l'âge de la voiture ?
   description: |
     Pour calculer l'empreinte de la construction de la voiture, qu'il ne faut pas négliger, nous utilisons l'âge de la voiture.
 
@@ -347,7 +345,7 @@ transport . voiture . facteur location:
     - https://www.ademe.fr/sites/default/files/assets/documents/enquete-autopartage-2019-rapport.pdf
 
 transport . voiture . propriétaire:
-  question: Avez-vous votre propre voiture individuelle ?
+  question: Possèdes-tu ta propre voiture individuelle ?
   description: |
     Par opposition à l'utilisation exclusive de voitures de location partagées par d'autres personnes le reste du temps, ou l'utilisation de la voiture d'un ami, de la famille.
 
@@ -362,322 +360,3 @@ transport . voiture . notif proprio:
       - km > 0
   description: |
     Vous n'êtes pas propriétaire d'une voiture, mais vous faites quand même des km : nous devons donc vous demander les caractéristiques des voitures que vous empruntez en tant que passager ou conducteur (voiture de location, voiture d'amis).
-
-transport . avion:
-  icônes: ✈️
-  applicable si: usager
-  description: |
-    ![](https://images.unsplash.com/photo-1525624286412-4099c83c1bc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80)
-
-    L'empreinte de l'avion est conséquente. Il n'est pas forcément plus polluant *au kilomètre* qu'une voiture qui ne déplace qu'une personne, 
-    mais la distance et surtout la distance parcourue en une heure (qu'on appelle couramment la vitesse), permet de changer de continent pour un week-end.
-
-    Gardons aussi en tête que le Français moyen ne prend pas ou peu l'avion. L'essentiel de l'empreinte de l'aviation est donc concentrée sur 10% ou moins des Français.
-
-  note: |
-    Nous avons fait le choix de demander le total d'heures de vol, plutôt que de demander à l'utilisateur de renseigner chacun de ses vols 
-    via l'aéroport de départ, d'arrivée et la classe économique. C'est une évolution possible par la suite, 
-    voir [ce simulateur](https://futur.eco/simulateur/transport/avion/impact) où une partie du travail est déjà faite.
-
-    A noter aussi que les escales entrainent des décollages supplémentaires, qui consomment plus de carburant qu'une vitesse de croisière.
-    C'est aussi un paramètre à prendre en compte par la suite.
-
-    Pour un modèle plus détaillé de l'empreinte de l'avion, nous avons trouvé deux sources.
-
-    L'algorithme complet de l'appli North, disponible [ici](https://github.com/tmrowco/northapp-contrib/blob/master/co2eq/flights/index.js).  
-
-    Le pseudo-algorithme de myclimate.org, ci-dessous.
-
-    ![](https://imgur.com/hIVvuIw.jpg).
-  formule:
-    somme:
-      - court courrier
-      - moyen courrier
-      - long courrier
-
-transport . avion . usager:
-  question: Prenez-vous l'avion ?
-  description: |
-    Si vous ne prenez pas l'avion tous les ans mais que vous comptez continuer à le prendre, répondez "oui" et estimez grossièrement le nombre d'heures de vol ramené à l'année. 
-
-    Ce n'est pas très rigoureux, mais l'avion a une telle empreinte sur le climat qu'il est important de prendre cela en compte.
-
-    > Par exemple, si vous avez pris un long-courrier de 20h en 2018 et que vous comptez le reprendre en 2022, nous pouvons partir du principe que vous le prenez tous les 4 ans environ : renseignez simplement `5 heures` à la question "long-courier".
-  par défaut: oui
-
-transport . avion . court courrier:
-  formule: heures de vol * vitesse moyenne * empreinte par km
-transport . avion . court courrier . vitesse moyenne:
-  formule: 600 / 1.3
-  unité: km/h
-  note: |
-    Nous utilisons la vitesse moyenne de vol pour un Paris Toulouse.
-transport . avion . court courrier . empreinte par km:
-  formule: 0.230
-  note: |
-    Nous utilisons le facteur d'émission de la tranche de distance < 1000 km (aller) de [ecolab-transport](https://github.com/betagouv/ecolab-transport/blob/master/ges-transport.yaml#L13).
-  unité: kgCO2e/km
-
-transport . avion . court courrier . heures de vol:
-  question: Combien d'heures par an voyagez-vous en avion en France métropolitaine ?
-  description: |
-    Comptez les heures que vous avez passé dans un avion pour des vols d'une distance inférieure à 1000km (à peu près). Si vous faites des escales, additionnez simplement les durées de chaque vol.
-
-
-    Les suggestions sont basées sur la durée minimum arrondie de vol constatée dans les moteurs de recherche, doublée pour considérer un aller-retour.
-
-    💡 Ne comptez que les km de déplacement personnel et de déplacement domicile travail pour rejoindre votre lieu de travail habituel.
-    Par exemple, si vous êtes en mission professionnelle dans un autre pays, cela rentre dans la comptabilité de votre entreprise.
-
-  suggestions:
-    🚫✈️: 0
-    Paris🔁Lyon: 2
-    Paris🔁Toulouse: 2.6
-    Paris🔁Nice: 2.8
-    Paris🔁Ajaccio: 3.2
-
-  unité: h/an
-  par défaut: 1 h/an
-
-transport . avion . moyen courrier:
-  formule: heures de vol * vitesse moyenne * empreinte par km
-transport . avion . moyen courrier . vitesse moyenne:
-  formule: 1350 / 2.5
-  unité: km/h
-  note: |
-    Nous utilisons la vitesse moyenne de vol pour un Paris Alger.
-transport . avion . moyen courrier . empreinte par km:
-  formule: (0.186 + 0.178) / 2
-  note: |
-    Nous utilisons la moyenne des facteurs d'émissions des tranches de distance 1000-2000km et 2000-3500km (aller) de [ecolab-transport](https://github.com/betagouv/ecolab-transport/blob/master/ges-transport.yaml#L13).
-  unité: kgCO2e/km
-
-transport . avion . moyen courrier . heures de vol:
-  question: Combien d'heures par an voyagez-vous en avion vers l'Europe ou le bassin méditerranéen ?
-  description: |
-    Comptez les heures que vous avez passé dans un avion pour des vols d'une distance entre 1000km et 3500km (à peu près). Si vous faites des escales, additionnez simplement les durées de chaque vol.
-
-    Les suggestions sont basées sur la durée minimum arrondie de vol constatée dans les moteurs de recherche, doublée pour considérer un aller-retour.
-
-    💡 Ne comptez que les km de déplacement personnel et de déplacement domicile travail pour rejoindre votre lieu de travail habituel.
-    Par exemple, si vous êtes en mission professionnelle dans un autre pays, cela rentre dans la comptabilité de votre entreprise.
-
-  suggestions:
-    🚫✈️: 0
-    Paris🔁Copenhague: 4
-    Paris🔁Alger: 5
-    Paris🔁Athènes: 6
-    Paris🔁Liban: 8
-
-  unité: h/an
-  par défaut: 1 h/an
-
-transport . avion . long courrier:
-  formule: heures de vol * vitesse moyenne * empreinte par km
-transport . avion . long courrier . vitesse moyenne:
-  formule: 5800 / 8.5
-  unité: km/h
-  note: |
-    Nous utilisons la vitesse moyenne de vol du modèle MicMac v2.6, déterminée selon [ces données](http://www.abm.fr/voyager-en-avion-le-guide-du-passager/en-complement/distances-et-durees-de-vol.html).
-transport . avion . long courrier . empreinte par km:
-  formule: 0.151
-  note: |
-    Nous utilisons le facteur d'émissions de la tranche > 3500km (aller) de [ecolab-transport](https://github.com/betagouv/ecolab-transport/blob/master/ges-transport.yaml#L13).
-  unité: kgCO2e/km
-
-transport . avion . long courrier . heures de vol:
-  question: Combien d'heures par an voyagez-vous au-delà en vol long courrier ?
-  description: |
-    Comptez les heures que vous avez passé dans un avion pour des vols d'une distance supérieure à 3500km, c'est-à-dire au-delà de l'Europe et du pourtour méditerranéen. 
-
-    Si vous faites des escales, additionnez simplement les durées de chaque vol.
-
-    Les suggestions sont basées sur la durée minimum arrondie de vol constatée dans les moteurs de recherche, doublée pour considérer un aller-retour.
-
-    💡 Ne comptez que les km de déplacement personnel et de déplacement domicile travail pour rejoindre votre lieu de travail habituel.
-    Par exemple, si vous êtes en mission professionnelle dans un autre pays, cela rentre dans la comptabilité de votre entreprise.
-
-  suggestions:
-    🚫✈️: 0
-    Paris🔁Kinshasa: 16
-    Paris🔁New York: 17
-    Paris🔁Tokyo: 24
-    Paris🔁Lima: 36
-    Paris🔁Sydney: 40
-
-  unité: h/an
-  par défaut: 1 h/an
-
-transport . train:
-  icônes: 🚋
-  description: |
-
-    ![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/TER_Vesoul.jpg/640px-TER_Vesoul.jpg)
-
-  formule: km * impact par km
-
-transport . train . impact par km:
-  formule: 0.0056
-  unité: kgCO2e/km
-transport . train . km:
-  question: Combien de kilomètres parcourez-vous en train par an ?
-  description: Les suggestions sont basées sur la distance à vol d'oiseau doublée pour considérer un aller-retour.
-  suggestions:
-    traversée d'une région: 300
-    Paris↔Lyon: 800
-    Brest↔Nice: 2400
-    💳 grand voyageur plus ultra: 10000
-  unité: km/an
-  par défaut: 1000 km/an
-
-transport . métro ou tram:
-  icônes: 🚊
-  description: |
-    ![](https://images.unsplash.com/photo-1581262208435-41726149a759?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60)
-  formule: heures par semaine * impact par heure * nombre de semaines
-
-transport . métro ou tram . impact par heure:
-  formule: 0.17
-  unité: kgCO2e/heures
-  note: Nous avons confondu tram et métro, alors que le modèle MicMac v2.6 ne parle que de métro.
-  description: |
-    Sur la base de 6,63 gCO2e/(passager.km) et de 25 km/h de vitesse moyenne. Base Carbone consultée le 22/06/19- Métro/tram/Trolley, réseaux urbains Classe 1 - amont et combustion ; transports.blog.lemonde.fr, consulté le 05/09/2014
-  références:
-    - http://transports.blog.lemonde.fr/2013/03/11/les-petits-secrets-de-la-ratp-reveles-au-public/
-      - http://www.bilans-ges.ademe.fr/
-
-transport . métro ou tram . heures par semaine:
-  question: Combien d'heures passez-vous par semaine en métro ou en tram ?
-  suggestions:
-    zéro: 0
-    1h / jour: 7
-    2h / jour: 14
-  unité: heures/semaine
-  par défaut: 3 heures/semaine
-
-transport . bus:
-  icônes: 🚌
-  description: |
-    ![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Alliance_Auch_ligne_6_Allées_Baylac.JPG/640px-Alliance_Auch_ligne_6_Allées_Baylac.JPG)
-  formule: heures par semaine * impact par heure * nombre de semaines
-
-nombre de semaines:
-  formule: 52
-  unité: semaine
-
-transport . bus . impact par heure:
-  formule: 1.99
-  unité: kgCO2e/heure
-  description: |
-    Sur la base de 166 gCO2e/(passager.km) et de 12 km/h de vitesse moyenne - Base Carbone consultée le 22/06/19 - Bus, moyen, réseaux urbains Classe 2 (zone urbaine et interurbaine) - amont et combustion ; Mairie de Paris pour la vitesse des bus, consulté le 05/09/2014
-  références:
-    - http://www.paris.fr/pratique/deplacements-voirie/transports-en-commun/promouvoir-les-transports-collectifs/rub_385_stand_10755_port_1208
-    - http://www.bilans-ges.ademe.fr/
-
-transport . bus . heures par semaine:
-  question: Combien d'heures passez-vous dans un bus par semaine ?
-  suggestions:
-    zéro: 0
-    1h / jour: 7
-    2h / jour: 14
-  unité: heures/semaine
-  par défaut: 3 heures/semaine
-
-transport . vélo:
-  icônes: 🚲
-  formule: empreinte * km
-
-transport . vélo . empreinte:
-  formule: 0
-  unité: kgCO2e/km
-  description: |
-    Le vélo est un mode de transport super sobre : on utilise 15 kilos de matériel pour déplacer un corps de ~70 kilos.
-
-    En pleine explosion, le vélo à assistance électrique permet de se mettre au vélo régulier en augmentant très peu l'empreinte de ce moyen de transport.
-
-    Idem pour tous les véhicules de moins de 50 kilos. 
-
-    > Astuce : vos chaussures sont un véhicule de moins de 50kg.
-
-  note: |
-    Nous considérons que le vélo a une empreinte nulle. 
-
-    Il est toujours possible de lui attribuer une empreinte de construction facilement amortie, et l'empreinte du surplus de calories, qui dépend du régime alimentaire. 
-
-    Nous avons tous les ingrédients ici pour le faire, mais c'est loin d'être aussi simple. Le surplus d'activité physique est aussi associé à des risques et donc des dépenses de santé bien moindres.
-transport . vélo . km:
-  titre: Kilomètres à vélo
-  question: Combien de kilomètres de vélo ou marche faites-vous par semaine ?
-  description: |
-    🚴 🛴 👟 
-
-    Renseignez ici les km à vélo classique, à vélo à assistance électrique, en trottinette et autre véhicule sobre.
-
-    > Un véhicule sobre est léger (moins de 30 kilos par exemple) et à vitesse réduite (moins de 25km/h, ce qui permet d'emprunter les pistes cyclables). 
-
-    Mais ne vous inquiétez pas trop de la précision : l'empreinte de ces modes sobres est ici considérée comme nulle, votre réponse n'aura donc aucune conséquence 😄.
-
-    > Note : 🛗 l'ascenseur est le transport en commun électrique le plus oublié ! Il n'a pas plus d'empreinte en ordre de grandeur que le vélo électrique.
-  suggestions:
-    zéro ou presque: 0 km
-    5km par jour: 35 km
-    10km par jour: 70 km
-  par défaut: 5 km
-  note: Le chiffre par défaut est une grossière estimation sans source, mais peu importe vu l'impact final nul.
-
-transport . deux roues thermique:
-  icônes: 🛵
-  applicable si: usager
-  formule: empreinte * km
-transport . deux roues thermique . usager:
-  question: Utilisez-vous un scooter ou une moto ?
-  description: |
-    Les scooters et motos sont aujourd'hui très majoritairement des engins qui fonctionnent au pétrole. Les équivalents électriques ont fait leur apparition, mais timidement.
-  par défaut: oui
-
-transport . deux roues thermique . km:
-  question: Combien de km faites-vous à l'année avec votre scooter ou moto ?
-  par défaut: 1000 km
-
-transport . deux roues thermique . type:
-  question: Quel type de deux roues thermique utilisez-vous ?
-  par défaut: "'scooter'"
-  formule:
-    une possibilité:
-      choix obligatoire: oui
-      possibilités:
-        - scooter
-        - moto inf 250
-        - moto sup 250
-
-transport . deux roues thermique . type . scooter:
-  titre: Scooter
-transport . deux roues thermique . type . moto inf 250:
-  titre: Moto moins de 250 cm3
-transport . deux roues thermique . type . moto sup 250:
-  titre: Moto plus de 250 cm3
-
-transport . deux roues thermique . empreinte:
-  formule:
-    variations:
-      - si: type = 'scooter'
-        alors: 0.0644 kgCO2e/km
-      - si: type = 'moto inf 250'
-        alors: 0.0616 kgCO2e/km
-      - si: type = 'moto sup 250'
-        alors: 0.168 kgCO2e/km
-
-  note: |
-    Scooter ; 64.4 gCO2e/km/personne ; calculs ADEME à partir d'HBEFA (2020)
-
-    Deux roues thermiques < 250cm3 ; 61,6 gCO2e/km/personne ; calculs ADEME à partir d'HBEFA (2020)
-
-    Deux roues thermiques > 250cm3 ; 168 gCO2e/km/personne ; calculs ADEME à partir d'HBEFA (2020)
-
-
-    Nous ne prenons en compte que l'empreinte à l'usage, pas la construction, faute de données.
-
-    Notons cependant que si l'on estime la fabrication à une tonne de CO2e, un véhicule qui ferait 100 000 km émetterait ~ 10 tonnes de CO2e, soit 10x l'empreinte de construction.
-
-  références:
-    documentation bilan-GES: https://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?routier2.htm

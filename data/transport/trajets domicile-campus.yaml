@@ -5,7 +5,7 @@ transport . domicile-campus:
   description: |
     ![](https://www.mobilitytechgreen.com/wp-content/uploads/2017/08/bicyclecommute.jpg)
 
-    Les déplacements pendulaires (du domicile jusqu’à l’école) représentent une part importante du bilan carbone de l’école. En 2018, les émissions associées à ce poste s’élevaient à 599 tCO2eq, soit environ 11% du bilan carbone total. 
+    Les déplacements pendulaires (du domicile jusqu’à l’école) représentent une part importante du bilan carbone de l’école. A titre d'exemple, en 2018, les émissions associées à ce poste au sein de Centrale Nantes s’élevaient à 599 tCO2eq, soit environ 11% du bilan carbone total. 
     Des disparités entre les catégories d’usager·ère·s étaient visibles, dues aux habitudes de transport de chacun·e, mais également de l’éloignement par rapport à l’établissement. Les automobilistes représentent la majeure partie des émissions liées aux déplacements domicile-campus.
   formule: # Ici nous pourrions utiliser un "non applicable si: jours par semaine = 0" mais un bug fait que la question km deviendra booléenne Oui/Non. Voir https://github.com/betagouv/mon-entreprise/issues/1367
     variations:
@@ -28,7 +28,7 @@ transport . domicile-campus . jours par semaine:
 transport . domicile-campus . moyens de transport:
   titre: Proportions moyens de transport
   description: |
-    A répartir parmi 6 moyens de transport qu'un usager de l'ECN est susceptible de prendre pour se rendre à Centrale (combinaisons possibles).
+    A répartir parmi 6 moyens de transport pour se rendre sur ton campus (combinaisons possibles).
   formule:
     somme:
       - neutre
@@ -40,7 +40,7 @@ transport . domicile-campus . moyens de transport:
 
 transport . domicile-campus . aller-retour:
   description: Augmentation de la part de transport Domicile-Travail de 20%, 60% ou 100% respectivement pour de temps en temps (1 fois sur 5), souvent (3 fois sur 5) et tous les jours.
-  question: 🎓 Vous arrive-t-il de faire un aller-retour dans la journée (pour la pause-dej par exemple)?
+  question: 🎓 Arrive-t-il que tu fasses un aller-retour dans la journée (pour la pause-dej par exemple)?
   par défaut: "'jamais'"
   formule:
     une possibilité:
@@ -111,7 +111,7 @@ transport . domicile-campus . moyens de transport . voiture . pourcent:
   période: semaine
 
 transport . domicile-campus . moyens de transport . voiture . km trajet:
-  question: 🎓 Quelle est la distance moyenne de votre trajet en voiture (aller simple)?
+  question: 🎓 Quelle est la distance moyenne de ton trajet en voiture (aller simple)?
   description: |
     Ne comptez que les kilomètres d'*un* trajet pour rejoindre votre lieu de travail habituel ou un point relais depuis votre domicile.
     Par exemple, si vous êtes en mission professionnelle dans un autre département ou un autre pays : ne le comptez pas ici.
@@ -142,7 +142,7 @@ transport . domicile-campus . moyens de transport . voiture . usage:
   unité: kgCO2e
 
 transport . domicile-campus . moyens de transport . voiture . voyageurs:
-  question: Quel est le nombre moyen de voyageurs dans la voiture ?
+  question: 🎓 Quel est le nombre moyen de voyageurs dans la voiture ?
   par défaut: 1
   unité: voyageurs
   suggestions:
@@ -183,7 +183,7 @@ transport . domicile-campus . moyens de transport . tram . impact par heure:
 
 transport . domicile-campus . moyens de transport . tram . minutes par trajet:
   applicable si: pourcent > 0
-  question: 🎓 Combien de temps, en moyenne, dure votre trajet en tramway (aller simple)?
+  question: 🎓 Combien de temps, en moyenne, dure ton trajet en tramway (aller simple)?
   suggestions:
     10 minutes / trajet: 10
     20 minutes / trajet: 20
@@ -226,7 +226,7 @@ transport . domicile-campus . moyens de transport . bus . impact par heure:
     - http://www.bilans-ges.ademe.fr/
 
 transport . domicile-campus . moyens de transport . bus . minutes par trajet:
-  question: 🎓 Combien de temps, en moyenne, dure votre trajet en bus (aller simple)?
+  question: 🎓 Combien de temps, en moyenne, dure ton trajet en bus (aller simple)?
   suggestions:
     10 minutes / trajet: 10
     20 minutes / trajet: 20
@@ -267,7 +267,7 @@ transport . domicile-campus . moyens de transport . train . impact par heure:
     - http://www.bilans-ges.ademe.fr/
 
 transport . domicile-campus . moyens de transport . train . minutes par trajet:
-  question: 🎓 Combien de temps, en moyenne, dure votre trajet en train (aller simple)?
+  question: 🎓 Combien de temps, en moyenne, dure ton trajet en train (aller simple)?
   suggestions:
     20 minutes / trajet: 20
     30 minutes / jour: 30
@@ -298,7 +298,7 @@ transport . domicile-campus . moyens de transport . deux roues . pourcent:
   période: semaine
 
 transport . domicile-campus . moyens de transport . deux roues . km trajet:
-  question: 🎓 Quelle est la distance moyenne de votre trajet en deux-roues (aller simple)?
+  question: 🎓 Quelle est la distance moyenne de ton trajet en deux-roues (aller simple)?
   description: |
     Ne comptez que les kilomètres d'*un* trajet pour rejoindre votre lieu de travail habituel ou un point relais depuis votre domicile.
     Par exemple, si vous êtes en mission professionnelle dans un autre département ou un autre pays : ne le comptez pas ici.
@@ -341,7 +341,7 @@ transport . domicile-campus . moyens de transport . deux roues . empreinte au ki
   note: hypothèse pour le scooter electrique (pas de ref)
 
 transport . domicile-campus . moyens de transport . deux roues . type:
-  question: Quel type de deux-roues utilisez-vous ?
+  question: Quel type de deux-roues utilises-tu ?
   description: Si vous utilisez plusieurs modes de transport parmi les suivants, choisissez la réponse la plus représentative de votre usage.
   par défaut: "'scooter thermique'"
   formule:
