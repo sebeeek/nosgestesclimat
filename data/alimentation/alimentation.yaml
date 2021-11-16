@@ -103,7 +103,7 @@ alimentation . boisson . sucrées:
 
     Nous n'avons pas évalué les gains d'empreinte offerts par ces alternatives, mais la préparation locale pour cet aliment très lourd, qui évite transports et emballages est sans doutes significative.
   unité: kgCO2e
-  formule: litres * nombre de semaines * facteur
+  formule: litres * nbre semaines * facteur
 
 alimentation . boisson . sucrées . facteur:
   formule: 1.1
@@ -128,7 +128,7 @@ alimentation . boisson . alcool:
     > Prenons l'exemple d'une 🍺 bière de 25cl : brassée au bout du monde, elle a voyagé des milliers de kilomètres et son contenu (la boisson) est emballé dans un contenant qui fait presque le même poids (200g de verre). 
 
     > En privilégiant une bière brassée localement, servie à la pression (le fût étant réutilisé des années), on peut réduire drastiquement l'empreinte sans changer la consommation.
-  formule: litres * nombre de semaines * facteur
+  formule: litres * nbre semaines * facteur
 
 alimentation . boisson . alcool . facteur:
   formule: 2
