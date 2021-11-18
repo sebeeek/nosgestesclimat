@@ -66,27 +66,84 @@ transport . autres déplacements . train:
   formule: empreinte
 
 transport . autres déplacements . train . présent:
-  question: Utilises-tu le tram ?
+  question: Prends-tu le train ?
   par défaut: oui
 
 transport . autres déplacements . train . empreinte:
   applicable si: présent
-  formule: impact par heure * heures par mois * nbre mois
+  formule:
+    somme:
+      - TER
+      - TGV
+  unité: kgCO2e
 
-transport . autres déplacements . train . impact par heure:
-  formule: 0.0248 * 135
-  unité: kgCO2e/heure
+transport . autres déplacements . train . TER:
+  titre: Trajet en TER
+  applicable si: présent
   description: |
-    Sur la base de 24.8 gCO2e/(passager.km) et de 135 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - TER - 2019 - Traction moyenne ; vitesse calculée sur la base du trajet TER Nantes-Angers
-  références:
-    - http://www.bilans-ges.ademe.fr/
+    Je voyage en TER à hauteur de :
 
-transport . autres déplacements . train . heures par mois:
-  question: Combien de temps, en moyenne, passes-tu dans le train chaque mois ?
-  suggestions:
-    a faire: 10
-  unité: heures/mois
-  par défaut: 2
+    ![](https://upload.wikimedia.org/wikipedia/commons/d/de/Tram-de-Nantes.jpg)
+  icônes: 🚃
+  formule:
+    variations:
+      - si: heures = 0
+        alors: 0
+      - sinon: heures * impact par heure
+
+transport . autres déplacements . train . TER . impact par heure:
+  formule: impact par km * vitesse
+  unité: kgCO2e/heure
+
+transport . autres déplacements . train . TER . impact par km:
+  formule: 0.0248
+  unité: kgCO2e/km
+  source: Base Carbone (TER - 2019 - Traction moyenne)
+
+transport . autres déplacements . train . TER . vitesse:
+  formule: 135
+  unité: km/heure
+  note: vitesse calculée sur le trajet Nantes-Angers en TER
+
+transport . autres déplacements . train . TER . heures:
+  question: Combien d'heures passez-vous en TER ?
+  par défaut: 10
+  unité: heures
+  période: année
+
+transport . autres déplacements . train . TGV:
+  titre: Trajet en TGV
+  applicable si: présent
+  description: |
+    Je voyage en TGV à hauteur de :
+
+    ![](https://upload.wikimedia.org/wikipedia/commons/d/de/Tram-de-Nantes.jpg)
+  icônes: 🚄
+  formule:
+    variations:
+      - si: heures = 0
+        alors: 0
+      - sinon: heures * impact par heure
+
+transport . autres déplacements . train . TGV . impact par heure:
+  formule: impact par km * vitesse
+  unité: kgCO2e/heure
+
+transport . autres déplacements . train . TGV . impact par km:
+  formule: 0.00173
+  unité: kgCO2e/km
+  source: Base Carbone (TGV - 2019)
+
+transport . autres déplacements . train . TGV . vitesse:
+  formule: 215
+  unité: km/heure
+  note: vitesse calculée sur le trajet Paris Marseille en TGV
+
+transport . autres déplacements . train . TGV . heures:
+  question: Combien d'heures passez-vous en TGV ?
+  par défaut: 10
+  unité: heures
+  période: année
 
 transport . autres déplacements . avion:
   titre: avion
@@ -99,19 +156,111 @@ transport . autres déplacements . avion . présent:
 
 transport . autres déplacements . avion . empreinte:
   applicable si: présent
-  formule: impact par heure * heures par an * nbre mois
+  formule:
+    somme:
+      - court courrier
+      - moyen courrier
+      - long courrier
+  unité: kgCO2
 
-transport . autres déplacements . avion . impact par heure:
-  formule: 0.0248 * 135
-  unité: kgCO2e/heure
+transport . autres déplacements . avion . court courrier:
+  titre: Trajet en France métropolitaine
   description: |
-    Sur la base de 24.8 gCO2e/(passager.km) et de 135 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - TER - 2019 - Traction moyenne ; vitesse calculée sur la base du trajet TER Nantes-Angers
-  références:
-    - http://www.bilans-ges.ademe.fr/
+    Je voyage en avion en France à hauteur de :
 
-transport . autres déplacements . avion . heures par an:
-  question: Combien de temps, en moyenne, passes-tu dans l'avion chaque année ?
-  suggestions:
-    a faire: 10
-  unité: heures/mois
-  par défaut: 2
+    ![](https://upload.wikimedia.org/wikipedia/commons/d/de/Tram-de-Nantes.jpg)
+  icônes: 🇫🇷
+  applicable si: présent
+  formule:
+    variations:
+      - si: heures = 0
+        alors: 0
+      - sinon: heures * impact par heure
+
+transport . autres déplacements . avion . court courrier . impact par heure:
+  formule: impact par km * vitesse
+  unité: kgCO2e/heure
+
+transport . autres déplacements . avion . court courrier . impact par km:
+  formule: 0.258
+  unité: kgCO2e/km
+  source: Base Carbone (Avion passagers - Court courrier, 2018 - AVEC trainées)
+
+transport . autres déplacements . avion . court courrier . vitesse:
+  formule: 600 / 1.3
+  unité: km/heure
+  note: Nous utilisons la vitesse moyenne de vol pour un Paris Toulouse.
+
+transport . autres déplacements . avion . court courrier . heures:
+  question: Combien d'heures passez-vous en avion court courrier ?
+  par défaut: 5
+  unité: heures
+  période: année
+
+transport . autres déplacements . avion . moyen courrier:
+  titre: Trajet en Europe et dans le bassin méditerranéen
+  description: |
+    Je voyage en avion en Europe à hauteur de :
+
+    ![](https://upload.wikimedia.org/wikipedia/commons/d/de/Tram-de-Nantes.jpg)
+  icônes: 🇪🇺
+  applicable si: présent
+  formule:
+    variations:
+      - si: heures = 0
+        alors: 0
+      - sinon: heures * impact par heure
+
+transport . autres déplacements . avion . moyen courrier . impact par heure:
+  formule: impact par km * vitesse
+  unité: kgCO2e/heure
+
+transport . autres déplacements . avion . moyen courrier . impact par km:
+  formule: 0.187
+  unité: kgCO2e/km
+  source: Base Carbone (Avion passagers - Moyen courrier, 2018 - AVEC trainées)
+
+transport . autres déplacements . avion . moyen courrier . vitesse:
+  formule: 1350 / 2.5
+  unité: km/heure
+  note: Nous utilisons la vitesse moyenne de vol pour un Paris Alger.
+
+transport . autres déplacements . avion . moyen courrier . heures:
+  question: Combien d'heures passez-vous en avion moyen courrier ?
+  par défaut: 3
+  unité: heures
+  période: année
+
+transport . autres déplacements . avion . long courrier:
+  titre: Trajet au-delà (long courrier)
+  description: |
+    Je voyage en avion en long courrier à hauteur de :
+
+    ![](https://upload.wikimedia.org/wikipedia/commons/d/de/Tram-de-Nantes.jpg)
+  icônes: 🌏
+  applicable si: présent
+  formule:
+    variations:
+      - si: heures = 0
+        alors: 0
+      - sinon: heures * impact par heure
+
+transport . autres déplacements . avion . long courrier . impact par heure:
+  formule: impact par km * vitesse
+  unité: kgCO2e/heure
+
+transport . autres déplacements . avion . long courrier . impact par km:
+  formule: 0.152
+  unité: kgCO2e/km
+  source: Base Carbone (Avion passagers - Long courrier, 2018 - AVEC trainées)
+
+transport . autres déplacements . avion . long courrier . vitesse:
+  formule: 5800 / 8.5
+  unité: km/heure
+  note: Nous utilisons la vitesse moyenne de vol du modèle MicMac v2.6, déterminée selon [ces données](http://www.abm.fr/voyager-en-avion-le-guide-du-passager/en-complement/distances-et-durees-de-vol.html).
+
+transport . autres déplacements . avion . long courrier . heures:
+  question: Combien d'heures passez-vous en avion long courrier ?
+  par défaut: 0
+  unité: heures
+  période: année
