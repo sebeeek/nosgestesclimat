@@ -33,7 +33,7 @@ transport . domicile-campus . moyens de transport:
     somme:
       - neutre
       - voiture
-      - tram
+      - métro ou tram
       - bus
       - train
       - deux roues
@@ -151,12 +151,12 @@ transport . domicile-campus . moyens de transport . voiture . voyageurs:
     à deux: 2
     à cinq: 5
 
-#------------------------------------------- moyen de transport Tram -------------------------------------------
+#------------------------------------------- moyen de transport métro ou tram -------------------------------------------
 
-transport . domicile-campus . moyens de transport . tram:
-  titre: tram
+transport . domicile-campus . moyens de transport . métro ou tram:
+  titre: métro ou tram
   description: |
-    J'utilise le tram à hauteur de :
+    J'utilise le métro ou tram à hauteur de :
 
     ![](https://upload.wikimedia.org/wikipedia/commons/d/de/Tram-de-Nantes.jpg) 🚄
   icônes: 🚋
@@ -166,24 +166,29 @@ transport . domicile-campus . moyens de transport . tram:
         alors: 0
       - sinon: pourcent / 100 * heures par jour * impact par heure * étudiant . nbre semaines * domicile-campus . jours par semaine
 
-transport . domicile-campus . moyens de transport . tram . pourcent:
-  question: Part du tram dans la répartition des moyens de transport sur la semaine
+transport . domicile-campus . moyens de transport . métro ou tram . pourcent:
+  question: Part du métro ou tram dans la répartition des moyens de transport sur la semaine
   par défaut: 50
   période: semaine
 
-transport . domicile-campus . moyens de transport . tram . impact par heure:
-  formule: 22 * 0.00298
-  unité: kgCO2e/heures
+transport . domicile-campus . moyens de transport . métro ou tram . impact par heure:
+  formule: impact par km * vitesse
+  unité: kgCO2e/heure
   note: Nous avons confondu tram et métro, alors que le modèle MicMac v2.6 ne parle que de métro.
-  description: |
-    Sur la base de 2,98 gCO2e/(passager.km) et de 22 km/h de vitesse moyenne. Vitesse calculée selon le temps nécessaire au tramway pour parcourir les lignes ; Base Carbone consultée le 04/12/20 - Métro, tramway, trolleybus - 2018 - Agglomération > à 250 000 habitants
-  références:
-    - https://fr.wikipedia.org/wiki/Tramway_de_Nantes
-    - http://www.bilans-ges.ademe.fr/
 
-transport . domicile-campus . moyens de transport . tram . minutes par trajet:
+transport . domicile-campus . moyens de transport . métro ou tram . impact par km:
+  formule: 0.00472
+  unité: kgCO2e/km
+  source: Base Carbone (Métro, tramway, trolleybus - 2018 - Agglomération de 100 000 à 250 000 habitants)
+
+transport . domicile-campus . moyens de transport . métro ou tram . vitesse:
+  formule: 25
+  unité: km/heure
+  source: https://encyclopedie.wikiterritorial.cnfpt.fr/xwiki/bin/view/Mots-Cles/Vitessecommerciale
+
+transport . domicile-campus . moyens de transport . métro ou tram . minutes par trajet:
   applicable si: pourcent > 0
-  question: 🎓 Combien de temps, en moyenne, dure ton trajet en tramway (aller simple)?
+  question: 🎓 Combien de temps, en moyenne, dure ton trajet en métro ou tramway (aller simple)?
   suggestions:
     10 minutes / trajet: 10
     20 minutes / trajet: 20
@@ -191,7 +196,7 @@ transport . domicile-campus . moyens de transport . tram . minutes par trajet:
   unité: minutes/trajet
   par défaut: 15
 
-transport . domicile-campus . moyens de transport . tram . heures par jour:
+transport . domicile-campus . moyens de transport . métro ou tram . heures par jour:
   formule: 2 * minutes par trajet / 60
   unité: heures/jour
 
@@ -216,14 +221,18 @@ transport . domicile-campus . moyens de transport . bus . pourcent:
   période: semaine
 
 transport . domicile-campus . moyens de transport . bus . impact par heure:
-  formule: 0.129 * 15
+  formule: impact par km * vitesse
   unité: kgCO2e/heure
-  description: |
-    Sur la base de 129 gCO2e/(passager.km) et de 12 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - Autobus moyen - Agglomération de plus de 250 000 habitants ;
-    - http://www.bilans-ges.ademe.fr/
-  références:
-    - https://www.lemonde.fr/blog/transports/2016/06/15/dans-les-villes-moyennes-des-bus-rapides-mais-vides-et-couteux/
-    - http://www.bilans-ges.ademe.fr/
+
+transport . domicile-campus . moyens de transport . bus . impact par km:
+  formule: 0.137
+  unité: kgCO2e/km
+  source: Base Carbone (Autobus moyen - Agglomération de 100 000 à 250 000 habitants)
+
+transport . domicile-campus . moyens de transport . bus . vitesse:
+  formule: 15
+  unité: km/heure
+  source: https://encyclopedie.wikiterritorial.cnfpt.fr/xwiki/bin/view/Mots-Cles/Vitessecommerciale
 
 transport . domicile-campus . moyens de transport . bus . minutes par trajet:
   question: 🎓 Combien de temps, en moyenne, dure ton trajet en bus (aller simple)?
@@ -259,12 +268,19 @@ transport . domicile-campus . moyens de transport . train . pourcent:
   période: semaine
 
 transport . domicile-campus . moyens de transport . train . impact par heure:
-  formule: 0.0248 * 135
+  formule: impact par km * vitesse
   unité: kgCO2e/heure
-  description: |
-    Sur la base de 24.8 gCO2e/(passager.km) et de 135 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - TER - 2019 - Traction moyenne ; vitesse calculée sur la base du trajet TER Nantes-Angers
-  références:
-    - http://www.bilans-ges.ademe.fr/
+
+transport . domicile-campus . moyens de transport . train . impact par km:
+  formule: 0.0248
+  unité: kgCO2e/km
+  note: on considère que les trajets en train effectués pour rejoindre son campus sont réasliés en train régional type TER.
+  source: Base Carbone (TER - 2019 - Traction moyenne)
+
+transport . domicile-campus . moyens de transport . train . vitesse:
+  formule: 135
+  unité: km/heure
+  note: vitesse calculée sur le trajet Nantes-Angers
 
 transport . domicile-campus . moyens de transport . train . minutes par trajet:
   question: 🎓 Combien de temps, en moyenne, dure ton trajet en train (aller simple)?

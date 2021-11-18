@@ -2,68 +2,35 @@ transport . autres déplacements:
   titre: Autres déplacements (annuel)
   formule:
     somme:
-      - métro
-      - tram
+      - métro ou tram
       - bus
       - train
       - avion
 
-transport . autres déplacements . métro:
+transport . autres déplacements . métro ou tram:
   titre: métro
   icônes: 🚉
   formule: empreinte
 
-transport . autres déplacements . métro . présent:
-  question: Utilises-tu le métro ?
+transport . autres déplacements . métro ou tram . présent:
+  question: Prends-tu le métro ?
   par défaut: oui
 
-transport . autres déplacements . métro . empreinte:
+transport . autres déplacements . métro ou tram . empreinte:
   applicable si: présent
   formule: impact par heure * heures par semaine * nbre semaines
 
-transport . autres déplacements . métro . impact par heure:
-  formule: 22 * 0.00298
+transport . autres déplacements . métro ou tram . impact par heure:
+  formule: domicile-campus . moyens de transport . métro ou tram . impact par heure
   unité: kgCO2e/heures
   note: Nous avons confondu tram et métro, alors que le modèle MicMac v2.6 ne parle que de métro.
-  description: |
-    Sur la base de 2,98 gCO2e/(passager.km) et de 22 km/h de vitesse moyenne. Vitesse calculée selon le temps nécessaire au tramway pour parcourir les lignes ; Base Carbone consultée le 04/12/20 - Métro, tramway, trolleybus - 2018 - Agglomération > à 250 000 habitants
-  références:
-    - http://www.bilans-ges.ademe.fr/
 
-transport . autres déplacements . métro . heures par semaine:
-  question: Combien de temps, en moyenne, passes-tu dans le métro chaque semaine ?
+transport . autres déplacements . métro ou tram . heures par semaine:
+  question: Combien de temps, en moyenne, passes-tu dans le métro ou tram chaque semaine ?
   suggestions:
-    a faire: 10
-  unité: heures/semaine
-  par défaut: 2
-
-transport . autres déplacements . tram:
-  titre: tram
-  icônes: 🚋
-  formule: empreinte
-
-transport . autres déplacements . tram . présent:
-  question: Utilises-tu le tram ?
-  par défaut: oui
-
-transport . autres déplacements . tram . empreinte:
-  applicable si: présent
-  formule: impact par heure * heures par semaine * nbre semaines
-
-transport . autres déplacements . tram . impact par heure:
-  formule: 22 * 0.00298
-  unité: kgCO2e/heures
-  note: Nous avons confondu tram et métro, alors que le modèle MicMac v2.6 ne parle que de métro.
-  description: |
-    Sur la base de 2,98 gCO2e/(passager.km) et de 22 km/h de vitesse moyenne. Vitesse calculée selon le temps nécessaire au tramway pour parcourir les lignes ; Base Carbone consultée le 04/12/20 - Métro, tramway, trolleybus - 2018 - Agglomération > à 250 000 habitants
-  références:
-    - https://fr.wikipedia.org/wiki/Tramway_de_Nantes
-    - http://www.bilans-ges.ademe.fr/
-
-transport . autres déplacements . tram . heures par semaine:
-  question: Combien de temps, en moyenne, passes-tu dans le tramway chaque semaine ?
-  suggestions:
-    a faire: 10
+    30 minutes: 0.5
+    2 heures: 2
+    15 minutes par jour: 1.75
   unité: heures/semaine
   par défaut: 2
 
@@ -73,7 +40,7 @@ transport . autres déplacements . bus:
   formule: empreinte
 
 transport . autres déplacements . bus . présent:
-  question: Utilises-tu le bus ?
+  question: Prends-tu le bus ?
   par défaut: oui
 
 transport . autres déplacements . bus . empreinte:
@@ -81,19 +48,15 @@ transport . autres déplacements . bus . empreinte:
   formule: impact par heure * heures par semaine * nbre semaines
 
 transport . autres déplacements . bus . impact par heure:
-  formule: 0.129 * 15
+  formule: domicile-campus . moyens de transport . bus . impact par heure
   unité: kgCO2e/heure
-  description: |
-    Sur la base de 129 gCO2e/(passager.km) et de 12 km/h de vitesse moyenne - Base Carbone consultée le 04/12/20 - Autobus moyen - Agglomération de plus de 250 000 habitants ;
-    - http://www.bilans-ges.ademe.fr/
-  références:
-    - https://www.lemonde.fr/blog/transports/2016/06/15/dans-les-villes-moyennes-des-bus-rapides-mais-vides-et-couteux/
-    - http://www.bilans-ges.ademe.fr/
 
 transport . autres déplacements . bus . heures par semaine:
   question: Combien de temps, en moyenne, passes-tu dans le bus chaque semaine ?
   suggestions:
-    a faire: 10
+    30 minutes: 0.5
+    2 heures: 2
+    15 minutes par jour: 1.75
   unité: heures/semaine
   par défaut: 2
 
