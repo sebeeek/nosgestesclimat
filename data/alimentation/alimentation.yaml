@@ -86,12 +86,12 @@ alimentation . boisson . eau en bouteille . empreinte:
 
 alimentation . boisson . eau en bouteille . affirmatif:
   titre: Eau en bouteille
-  question: Buvez-vous votre eau en bouteille ?
+  question: Bois-tu ton eau en bouteille ?
   par défaut: non
   description: |
-    Si vous buvez principalement de l'eau du robinet et que votre consommation d'eau en bouteille se réduit à de rares occasions (par exemple un repas sur le pouce en boulangerie par semaine, avec leur fameux menu "sandwich + dessert + boisson en bouteille plastique"), répondez non.
+    Si tu bois principalement de l'eau du robinet et que ta consommation d'eau en bouteille se réduit à de rares occasions (par exemple un repas sur le pouce en boulangerie par semaine, avec leur fameux menu "sandwich + dessert + boisson en bouteille plastique"), réponds non.
 
-    Si vous achetez régulièrement des packs d'eau en bouteille au supermarché ou si vous achetez une petite bouteille chaque jour à la cantine du boulot, répondez oui.
+    Si tu achètes régulièrement des packs d'eau en bouteille au supermarché ou si tu achètes une petite bouteille chaque jour à la cantine du boulot, réponds oui.
   note: |
     Les français boivent en moyenne entre 100 et 150 litres d'eau en bouteille par an [source](https://www.planetoscope.com/consommation-eau/854-litres-d-eau-en-bouteille-vendus-en-france.html), soit environ un tiers de nos besoins de 1-1,5l par jour [source](https://www.mangerbouger.fr/Le-Mag/Bien-etre/L-eau-indispensable-a-notre-bonne-sante).
 
@@ -111,7 +111,7 @@ alimentation . boisson . sucrées . facteur:
 
 alimentation . boisson . sucrées . litres:
   titre: Consommation de boissons sucrées
-  question: Quelle est votre consommation par semaine de sodas, jus de fruit, sirops, etc. ?
+  question: Quelle est ta consommation par semaine de sodas, jus de fruit, sirops, etc. ?
   suggestions:
     nulle: 0 l/semaine
     modérée: 1 l/semaine
@@ -136,7 +136,7 @@ alimentation . boisson . alcool . facteur:
 
 alimentation . boisson . alcool . litres:
   titre: Consommation d'alcool
-  question: Quelle est votre consommation par semaine d'alcool (vin, bière, etc.) ?
+  question: Quelle est ta consommation par semaine d'alcool ? (N'oublies pas que tu fais beaucoup de soirées !)
   suggestions:
     nulle: 0
     modérée: .5
@@ -564,11 +564,9 @@ alimentation . petit déjeuner:
       - sinon: 0
 
 alimentation . petit déjeuner . type:
-  question: Quel petit déjeuner vous correspond le plus ?
+  question: Quel petit déjeuner te correspond le plus ?
   description: |
-    Il existe une variété infinie de petit déjeuners. Nous en avons sélectionné quelques uns pour que vous obteniez une réponse facilement.
-
-    Il manque votre petit déjeuner et vous pensez ne pas pas être le seul à l'apprécier ? [Écrivez-nous](/contribuer).
+    Il existe une variété infinie de petit déjeuners. Nous en avons sélectionné quelques uns pour que tu obtiennes une réponse facilement.
 
   par défaut: "'français'"
   formule:
@@ -605,7 +603,7 @@ alimentation . lait . empreinte:
     La base agribalyse v3, qui sera disponible en octobre 2020, pourrait consolider ces données.
 
 alimentation . lait . type:
-  question: Quel type de lait consommez-vous ?
+  question: Quel type de lait consommes-tu ?
   par défaut: "'lait de vache'"
   formule:
     une possibilité:
@@ -689,9 +687,9 @@ alimentation . orange:
 alimentation . petit déjeuner . type . aucun:
   titre: Pas de petit-dej'
   description: |
-    Vous ne mangez rien au petit déjeuner (mais vous pouvez boire un café ou un thé).
+    Tu ne manges rien au petit déjeuner (mais tu peux boire un café ou un thé).
 
-    À noter : nous intégrons automatiquement un café et un thé par jour dans le calcul. Vous pourrez bientôt nous en dire plus sur votre consommation personnelle.
+    À noter : nous intégrons automatiquement un café et un thé par jour dans le calcul. Tu pourras bientôt nous en dire plus sur ta consommation personnelle.
 alimentation . petit déjeuner . type . lait céréales:
   icônes: 🥣🎑
   description: |
@@ -703,8 +701,6 @@ alimentation . petit déjeuner . type . français:
     Il ne semble pas exister de petit déjeuner standard français (pas de page Wikipedia).  
 
     Il semble proche du petit-déjeuner appelé ["continental"](https://fr.wikipedia.org/wiki/Déjeuner#Repas_de_type_continental).
-
-    Ceci est une proposition parmi d'autres possibilités, qui peut bien sûr ne pas correspondre au votre.
 
   note: |
     Faut-il inclure du beurre, confiture ? Un pain au chocolat ? 
@@ -748,7 +744,7 @@ facteur carbone CO2:
 
 alimentation . déchets . niveau d'engagement:
   titre: Engagement zéro déchet
-  question: Êtes-vous engagé dans une démarche zéro déchet ?
+  question: Es- tu engagé dans une démarche zéro déchet ?
   description: |
     L'engagement zéro déchet consiste à réduire au maximum les achats d'aliments emballés (les yaourts sont donc exclus par exemple) et donc privilégier le vrac, 
     le compostage (en jardin ou en vermicompost) des déchets organiques, etc.

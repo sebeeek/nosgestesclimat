@@ -1,7 +1,7 @@
 divers . associatif:
   applicable si: engagéasso
   icônes: 🎉
-  description: Le but est de préciser votre Bilan Carbone en vous questionnant sur votre vie associative au sein de votre école. A titre d'exemple, en 2018, l’impact carbone des activités associatives à l'école Centrale Nantes représentait 8% du total des émissions de l'école.
+  description: Le but est de préciser ton test en te questionnant sur ta vie associative au sein de l'école. A titre d'exemple, en 2018, l’impact carbone des activités associatives à l'école Centrale Nantes représentait 8% du total des émissions de l'école.
   formule:
     somme:
       - WEI
@@ -27,9 +27,9 @@ divers . associatif . WEI . affirmatif:
 divers . associatif . asso:
   titre: Empreinte de la vie associative
   description: |
-    A choisir :  les différentes associations dont vous faites partie. 
+    A choisir : les différentes associations dont tu fais partie. 
 
-    Cette question permet de savoir si vous êtes membre de quelques associations particulièrement émettrices de CO2. Le but de cette question n'est pas de stigmatiser les membres de ces associations. En effet, ces associations ont des bénéfices sociaux importants, ce qui malheureusement n'apparaît pas dans un Bilan Carbone.
+    Cette question permet de savoir si tu es membre de quelques associations particulièrement émettrices de CO2. Le but de cette question n'est pas de stigmatiser les membres de ces associations. En effet, ces associations ont des bénéfices sociaux importants, ce qui malheureusement n'apparaît pas dans un Bilan Carbone.
   icônes: 🎉
   formule:
     somme:
@@ -75,7 +75,7 @@ divers . associatif . asso . BDS:
   description: |
     Association Sportive
 
-    Environ 350 personnes cotisent à l’Association Sportive de Centrale Nantes tous les ans. Le même raisonnement que pour le BDE a été appliqué ici : certaines dépenses faites par l’AS servent à tous les cotisants (maintenances des terrains, achat de matériel…). Il faut néanmoins demander si vous participez à des compétitions à l’extérieur de Centrale car seules certaines personnes représentent l’école lors des compétitions sportives.
+    Environ 350 personnes cotisent à l’Association Sportive de Centrale Nantes tous les ans. Le même raisonnement que pour le BDE a été appliqué ici : certaines dépenses faites par l’AS servent à tous les cotisants (maintenances des terrains, achat de matériel…). Il faut néanmoins demander si tu participes à des compétitions à l’extérieur de Centrale car seules certaines personnes représentent l’école lors des compétitions sportives.
 
 divers . associatif . asso . BDS . empreinte:
   formule:
@@ -105,7 +105,7 @@ divers . associatif . asso . BDS . empreinte . évènements:
   source: BC ECN
 
 divers . associatif . asso . BDS . empreinte . évènements . affirmatif:
-  question: Avez-vous participé à des évènements sportifs hors de Nantes (Intercentrales, CCL, championnats régional/national...) ?
+  question: As-tu participé à des évènements sportifs (tournois, championnat régional/national...) ?
   par défaut: non
 
 divers . associatif . asso . BDS . empreinte . textile:
@@ -115,7 +115,7 @@ divers . associatif . asso . BDS . empreinte . textile:
   source: BC ECN
 
 divers . associatif . asso . BDS . empreinte . textile . affirmatif:
-  question: Avez-vous acheté des tenues de sport pour le sport que vous pratiquez à Centrale ?
+  question: As-tu acheté des tenues de sport pour le sport que tu pratiques à l'école ?
   par défaut: non
 
 divers . associatif . asso . BDA . adhésion:

@@ -23,7 +23,7 @@ divers . autres produits:
   unité: kgCO2e
 
 divers . autres produits . montant:
-  question: Combien dépensez-vous par an en produits manufacturés neufs (mobilier, livres, etc.) ?
+  question: Combien dépenses-tu par an en produits manufacturés neufs (mobilier, livres, etc.) ?
   unité: €/an
   description: |
     Pour garder l'interface simple, nous proposons une estimation de l'empreinte de cette catégorie de produits basée sur leur coût. 

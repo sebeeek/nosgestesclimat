@@ -24,7 +24,7 @@ divers . électroménager . appareils:
       - tondeuse électrique
 
 divers . électroménager . réfrigérateur . présent:
-  question: Possedez vous un réfrigérateur ?
+  question: Possèdes-tu un réfrigérateur ?
   par défaut: oui
 divers . électroménager . réfrigérateur . durée:
   formule: 10
@@ -39,7 +39,7 @@ divers . électroménager . réfrigérateur:
   unité: kgCO2e
 
 divers . électroménager . mini réfrigérateur . présent:
-  question: Possedez vous un mini réfrigérateur ?
+  question: Possèdes-tu un mini réfrigérateur ?
   par défaut: oui
 divers . électroménager . mini réfrigérateur . durée:
   formule: 10
@@ -51,7 +51,7 @@ divers . électroménager . mini réfrigérateur:
   unité: kgCO2e
 
 divers . électroménager . lave-linge . présent:
-  question: Possedez vous un lave-linge ?
+  question: Possèdes-tu un lave-linge ?
   par défaut: oui
 divers . électroménager . lave-linge . durée:
   formule: 10
@@ -63,7 +63,7 @@ divers . électroménager . lave-linge:
   unité: kgCO2e
 
 divers . électroménager . sèche-linge . présent:
-  question: Possedez vous un sèche-linge ?
+  question: Possèdes-tu un sèche-linge ?
   par défaut: oui
   # quand la mosa*ïque acceptera les valeurs par défaut calculées
   # par défaut: logement . surface > 70 m2
@@ -78,7 +78,7 @@ divers . électroménager . sèche-linge:
   unité: kgCO2e
 
 divers . électroménager . lave-vaisselle . présent:
-  question: Possedez vous un lave-vaisselle ?
+  question: Possèdes-tu un lave-vaisselle ?
   par défaut: oui
 divers . électroménager . lave-vaisselle . durée:
   formule: 10
@@ -90,7 +90,7 @@ divers . électroménager . lave-vaisselle:
   unité: kgCO2e
 
 divers . électroménager . four . présent:
-  question: Possedez vous un four ?
+  question: Possèdes-tu un four ?
   par défaut: oui
 divers . électroménager . four . durée:
   formule: 12
@@ -102,7 +102,7 @@ divers . électroménager . four:
   unité: kgCO2e
 
 divers . électroménager . micro-ondes . présent:
-  question: Possedez vous un micro-ondes ?
+  question: Possèdes-tu un micro-ondes ?
   par défaut: oui
 divers . électroménager . micro-ondes . durée:
   formule: 12
@@ -114,7 +114,7 @@ divers . électroménager . micro-ondes:
   unité: kgCO2e
 
 divers . électroménager . plaques . présent:
-  question: Possedez vous des plaques de cuisson ?
+  question: Possèdes-tu des plaques de cuisson ?
   par défaut: oui
 divers . électroménager . plaques . durée:
   formule: 10
@@ -127,7 +127,7 @@ divers . électroménager . plaques:
   note: On considère des plaques vitrocéramiques
 
 divers . électroménager . bouilloire . présent:
-  question: Possedez vous une bouilloire ?
+  question: Possèdes-tu une bouilloire ?
   par défaut: oui
 divers . électroménager . bouilloire . durée:
   formule: 6
@@ -139,7 +139,7 @@ divers . électroménager . bouilloire:
   unité: kgCO2e
 
 divers . électroménager . cafetière . présent:
-  question: Possedez vous une cafetière ?
+  question: Possèdes-tu une cafetière ?
   par défaut: oui
 divers . électroménager . cafetière . durée:
   formule: 6
@@ -152,7 +152,7 @@ divers . électroménager . cafetière:
   note: On considère une machine à filtre
 
 divers . électroménager . aspirateur . présent:
-  question: Possedez vous un aspirateur ?
+  question: Possèdes-tu un aspirateur ?
   par défaut: oui
 divers . électroménager . aspirateur . durée:
   formule: 8
@@ -165,7 +165,7 @@ divers . électroménager . aspirateur:
   note: On considère un aspirateur sans sac
 
 divers . électroménager . robot cuisine . présent:
-  question: Possedez vous un robot cuisine ?
+  question: Possèdes-tu un robot cuisine ?
   par défaut: non
 divers . électroménager . robot cuisine . durée:
   formule: 6
@@ -178,7 +178,7 @@ divers . électroménager . robot cuisine:
   unité: kgCO2e
 
 divers . électroménager . tondeuse électrique . présent:
-  question: Possedez vous une tondeuse électrique ?
+  question: Possèdes-tu une tondeuse électrique ?
   par défaut: non
 divers . électroménager . tondeuse électrique . durée:
   formule: 10
@@ -192,15 +192,15 @@ divers . électroménager . tondeuse électrique:
   unité: kgCO2e
 
 divers . électroménager . préservation:
-  question: Quel effort faites-vous pour garder vos appareils électroménagers le plus longtemps possible ?
+  question: Quel effort fais-tu pour garder tes appareils électroménagers le plus longtemps possible ?
   description: |
-    Pour éviter de vous demander de renseigner l'âge précis de la dizaine d'appareils électroménager que vous possédez, nous utilisons une grille d'âge moyen constaté pour chaque appareil. 
+    Pour éviter de te demander de renseigner l'âge précis de la dizaine d'appareils électroménager que tu possédez, nous utilisons une grille d'âge moyen constaté pour chaque appareil. 
 
     Par exemple, un frigo dure en moyenne 10 ans, un four 12 ans et une bouilloire 6 ans. Vous pouvez explorer la durée moyenne et l'empreinte de chaque appareil [ici](/documentation/divers/électroménager/appareils).
 
     > Il ne s'agit pas de l'âge de l'appareil quand il claque, mais de son âge quand son propriétaire décide de le remplacer par du neuf.
 
-    A vous de vous placer par rapport à la moyenne.
+    A toi de te placer par rapport à la moyenne.
   par défaut: "'moyen'"
   formule:
     une possibilité:
