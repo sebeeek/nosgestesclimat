@@ -56,6 +56,25 @@ transport . arrêter l'avion court:
    #Un aller-retour Paris-Marseille émet environ 250 kgCO2eq en avion contre seulement 3 kgCO2eq en train (source Base Carbone)
    #Choisir de se rendre, depuis Paris, à Barcelone (en train) plutôt qu’à Marrakech (en avion) permettra d’éviter d’émettre 781 kg de CO2eq (source Base Carbone)
 
+## Il est théoriquement possible que le recalcul soit négatif 
+transport . changement motorisation:
+  titre: Rouler en électrique ?
+  effort: conséquent
+  icônes: 🚗☮
+  formule: formule: transport . voiture . empreinte - transport . électrique . recalcul
+  description: |
+    La voiture électrique n'est pas la solution miracle mais pour certains usages elle peut s'avérer utile pour réduire l'empreinte carbone de nos déplacements.
+    Si vous voulez mieux comprendre les enjeux de la voiture électrique consultez nos explications détaillées [Renvoyer vers la fiche élaborées (qui n'est peut être pas mises).]
+  note: |
+    Envisager de ne proposer cette action que si elle > 0 voire > à plusieurs centaines de kgCO2eq
+    
+transport . électrique . recalcul:
+  formule:
+    recalcul:
+      règle: transport . voiture . empreinte
+      avec:
+        transport . voiture . motorisation . électrique:
+
 transport . éco-conduite: 
   titre: Adopter une éco-conduite
   effort: faible
