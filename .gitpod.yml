@@ -1,2 +1,13 @@
 # multi-repo
-mainConfiguration: https://github.com/datagir/nosgestesclimat-site
+additionalRepositories:
+  - url: https://github.com/datagir/nosgestesclimat-site
+
+tasks:
+  - name: frontend
+    before: |
+      cd ../nosgestesclimat-site
+    init: |
+      yarn
+    command: |
+      # Launch 
+      yarn start
