@@ -88,7 +88,7 @@ prix . avocat:
 
 Grâce à Gitpod, vous aurez en quelques minutes un environnement de travail dans votre navigateur qui vous permet de modifier les modèles carbone et de voir en un rafraichissement de page comment ils impactent l'interface de NGC. C'est parti ! 
 
-- Cliquez sur le bouton suivant (**à ne faire qu'une fois, ensuite vous le réutiliserez**) : [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datagir/nosgestesclimat-site/) 
+- Cliquez sur le bouton suivant (**à ne faire qu'une fois, ensuite vous le réutiliserez puisqu'il sera ajouter à votre dashboard [Gitpod](https://gitpod.io/workspaces)**) : [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datagir/nosgestesclimat-site/) 
 - Un nouvel onglet s'ouvre, vous avez accès à tout un environnement de développement, appelé Visual Studio Code, qui est un standard aujourd'hui parmi les développeurs Web. Pour afficher l'ensemble des fichiers du workspace, cliquez sur le menu en haut à gauche, puis File, Open folder... et sélectionnez /workspace/. Vous pouvez ensuite naviguer dans les fichiers, les modifier, puis envoyer vos changements sur git via l'onglet (vertical) "Source control". 
 - Vous verez dans ces onglets la liste des fichiers modifiés, appellée "Changes". Pour faire votre 1er commit, vous devez ajouter des fichiers en cliquant sur "+" à droite du fichier. Vous avez alors des "stages changes". Écrivez un message de commit, puis validez ! 
 - C'est bien beau de pouvoir faire des changements, mais comment être sur qu'ils *compilent*, c'est à dire que leur forme est correcte, et que leur fond l'est aussi, ce qui vous demande de voir l'impact qu'ont vos changements sur l'interface NGC ? 
@@ -96,7 +96,7 @@ Grâce à Gitpod, vous aurez en quelques minutes un environnement de travail dan
 - Dans le cas ou vous ne voyez pas écrit "compiled successfully" ou que rien n'a été lancé, suivez ces instructions:
  - Vérifiez que vous êtes dans le dossier 'nosgestes-climat-site' via la commande `pwd`. Si vous n'y êtes, déplacez vous via la commande `cd`.
  - Lancez : `yarn && yarn start` : la commande `yarn` installe les dépendances du site, puis `yarn start` lance la compilation et le serveur; ⏳️ attendez un peu que ça se passe
-- vous verrez normalement un dialogue en bas à droite disant "A service is available on port 8080", cliquez sur le bouton vert "Open browser"
+- Vous verrez normalement un dialogue en bas à droite disant "A service is available on port 8080", cliquez sur le bouton "Open browser". Si vous ne voyez pas cette fenêtre, rdv dans l'onglet "Remote Explorer" et cloquez sur la planète (open browser) à droite du port 8080. 
 - si tout s'est bien passé, vous avez le site qui tourne *avec votre version du modèle climat*, que vous pouvez modifier à votre guise. Après un changement du modèle dans votre environnement de développement (ajoutez 1000 à la somme de `bilan.yaml`) par exemple, faites Ctrl-S (sauvegarder) puis allez voir l'onglet du site ouvert juste avant et faites F5 : le calcul aura changé de 1000 😀
 - vous pouvez aussi changer les textes des questions : la fonction recherche dans le menu à gauche peut-être utile pour retrouver facilement l'endroit dans le code qui correspond au texte que vous souhaité modifier !
 
