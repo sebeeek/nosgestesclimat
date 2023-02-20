@@ -10,6 +10,7 @@ logement:
   couleur: '#04a4ac'
   icônes: 🏠
   formule: impact / habitants
+  unité: kgCO2e
 
 logement . impact:
   formule:
@@ -111,10 +112,11 @@ logement . construction . par surface:
   formule:
     variations:
       - si: éco-construit
-        alors: 144 kgCO2e/m2
+        alors: 144
       - si: appartement
-        alors: 525 kgCO2e/m2
-      - sinon: 425 kgCO2e/m2
+        alors: 525
+      - sinon: 425
+  unité: kgCO2e/m2
   note: |
     Notons que pour le logement éco-construit, le CO₂ biogénique stocké n'est pas comptabilisé, seul le CO₂ fossile émis l'est.
 

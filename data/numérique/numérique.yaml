@@ -17,8 +17,8 @@ divers . numérique . internet:
   formule: empreinte horaire * durée journalière * 365
   unité: kgCO2e
 divers . numérique . internet . consommation horaire:
-  formule: (0.12 + 0.24) / 2
-  unité: kWh/h
+  formule: (0.12 kWh/heure + 0.24 kWh/heure) / 2
+  unité: kWh/heure
   note: |
     Ce chiffre a été retenu dans le calculateur MicMac version 2.6. La source est un article de CarbonBrief utilisant des données AIE, et critiquant les calculs du Shift Project.
 
@@ -42,8 +42,8 @@ divers . numérique . internet . empreinte horaire:
 divers . numérique . internet . durée journalière:
   question: Combien d'heures passez-vous par jour sur internet hors bureau (envoi de mail, surf Web, streaming vidéo, etc.) ?
   description: Comptez seulement une estimation à la louche de vos heures hors bureau, car ce que vous faites au boulot entre dans la comptabilité de votre entreprise ou organisation.
-  unité: heures
-  par défaut: 2 heures
+  unité: heure
+  par défaut: 2
   suggestions:
     zéro: 0
     modérément: 2
@@ -175,7 +175,7 @@ divers . numérique . appareils . téléphone . impact:
   icônes: 📱✨
   applicable si: présent
   exposé: oui
-  unité: kgCO₂e
+  unité: kgCO2e
   références:
     - https://www.bilans-ges.ademe.fr/fr/basecarbone/donnees-consulter/liste-element?recherche=Smartphone
     - https://www.bilans-ges.ademe.fr/fr/accueil/documentation-gene/index/page/produits_informatiques__electr

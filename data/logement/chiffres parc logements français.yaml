@@ -287,7 +287,7 @@ parc français . chauffage . consommation GPL moyenne relative:
 
 fioul kWh au litre:
   formule: 0.101436943
-  unité: l/kWh
+  unité: litre/kWh
   note: |
     Selon la base carbone (https://bilans-ges.ademe.fr/fr/accueil/documentation-gene/index/page/New_liquides),
     le pouvoir calorifique du fioul domestique est de 42GT/T et sa masse volumique est de 845 kg/m3.

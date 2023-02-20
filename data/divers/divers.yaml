@@ -22,12 +22,12 @@ divers:
 divers . autres produits:
   abréviation: autres prod.
   icônes: 📦
-  formule: 0.055 * montant
+  formule: 0.055 kgCO2e/€ * montant
   unité: kgCO2e
 
 divers . autres produits . montant:
   question: Combien dépensez-vous par an en produits manufacturés neufs (mobilier, livres, etc.) ?
-  unité: €/an
+  unité: €
   description: |
     Pour garder l'interface simple, nous proposons une estimation de l'empreinte de cette catégorie de produits basée sur leur coût.
 
@@ -36,7 +36,7 @@ divers . autres produits . montant:
     De même, un tabouret en plastique pourrait très bien avoir 5 fois plus d'empreinte qu'un tabouret artisanal en bois massif (le bois capte du CO₂ pendant sa croissance), et pourtant ce dernier est susceptible de coûter 2 fois plus cher.
 
   note: Cette catégorie est assez vague, il faudrait au moins donner plus d'exemples.
-  par défaut: 2000 €/an
+  par défaut: 2000 €
 
 intensité électricité:
   titre: Intensité climat du mix électrique français

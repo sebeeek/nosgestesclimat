@@ -36,8 +36,12 @@ logement . climatisation . rappel kWh:
   formule: présent
 
 logement . climatisation . empreinte unitaire:
-  formule: fuite annuelle . empreinte + fuite fin de vie . empreinte . amortie + (construction / durée de vie)
-  unité: kgCO2e/climatiseur
+  formule:
+    somme:
+      - fuite annuelle . empreinte
+      - fuite fin de vie . empreinte . amortie
+      - construction / durée de vie
+  unité: kgCO2e
 
 logement . climatisation . charge moyenne:
   formule: 1.72
